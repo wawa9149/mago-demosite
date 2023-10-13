@@ -36,13 +36,14 @@ dependencies:
   dio: ^4.0.0 #for http request
   path_provider: ^2.0.5 #for saving file
   permission_handler: ^8.1.4 #for permission
-  file_picker: ^4.0.0 #for picking file
+  file_picker: ^5.5.0 #for picking file
   logger: ^1.1.0 #for logging
-  desktop_drop: ^0.1.0 #for drag and drop
+  desktop_drop: ^0.4.4 #for drag and drop
   webdev: ^3.0.6 #for web
   archive: ^3.1.2 #for zip
 
   flutter_sound: ^9.2.13
+  get: ^4.6.6 #for state management
 
 
   # The following adds the Cupertino Icons font to your application.

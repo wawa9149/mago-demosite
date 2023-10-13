@@ -1,33 +1,27 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:path_provider/path_provider.dart';
-//import 'package:permission_handler/permission_handler.dart';
-import 'package:uuid/uuid.dart';
 import 'dart:async';
-
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-
 import 'package:logger/logger.dart';
 
-//import 'dart:html' as html;
-
 class Recording extends StatefulWidget {
-  const Recording({super.key});
+  final String? filePath; // 인식된 텍스트
+
+  const Recording({Key? key, this.filePath}) : super(key: key);
 
   @override
   State<Recording> createState() => _RecordingState();
+
 }
 
 class _RecordingState extends State<Recording> {
   late FlutterSoundPlayer _player; // 플레이어
   late FlutterSoundRecorder _recorder; // 녹음기
-  bool _isRecording = false; // 녹음 중인지 여부
   late String _recordingPath; // 녹음 파일 경로
-  String? _recognizedText; // 인식된 텍스트
+  late String _recognizedText; // 인식된 텍스트
   var logger = Logger();
   var magoSttApi = MagoSttApi('http://saturn.mago52.com:9003/speech2text'); // API 객체
 
@@ -37,75 +31,15 @@ class _RecordingState extends State<Recording> {
     super.initState();
     _player = FlutterSoundPlayer();
     _recorder = FlutterSoundRecorder();
-    _recordingPath = '';
-    //requestMicrophonePermission();
   }
-
-  // 녹음 시작
-  void Start() async {
-    // 파일 이름 생성
-    // 녹음 시작
-    _startRecording(generateFileName());
-  }
-
-  // void requestMicrophonePermission() async {
-  //   // 마이크 권한을 요청합니다.
-  //   var permissionStatus = await html.window.navigator.permissions?.request({'name': 'microphone'});
-  //
-  //   if (permissionStatus?.state == 'granted') {
-  //     print('마이크 권한이 허용되었습니다.');
-  //   } else {
-  //     print('마이크 권한이 거부되었습니다.');
-  //   }
-  // }
 
   // 녹음 중지
   void Reqest() async {
-    // 녹음 중지
-    await _stopRecording();
+    _recordingPath = widget.filePath ?? '';
+    print('recordingPath: $_recordingPath');
+    _playRecording();
     // 음성 인식 요청
-    await uploadAndProcessAudio();
-  }
-
-  String generateFileName() {
-    // 파일 이름 랜덤 생성
-    // Returns
-    // String formattedV4
-    String v4 = '${const Uuid().v4()}.wav'; // 랜덤 UUID 생성
-    String formattedV4 = v4.replaceAll('-', ''); // 하이픈 제거
-    return formattedV4;
-  }
-
-  // 녹음 시작
-  Future<void> _startRecording(String fileName) async {
-    // 외부 저장소 디렉터리 가져오기
-    Directory? directory = await getExternalStorageDirectory();
-    // 파일 경로 생성
-    String filePath = '${directory?.path}/$fileName';
-    // 녹음기 초기화
-    await _recorder.openRecorder();
-    // 녹음 시작
-    await _recorder.startRecorder(
-      toFile: filePath,
-      codec: Codec.pcm16WAV,
-    );
-    // 상태 업데이트
-    setState(() {
-      _isRecording = true;
-      _recordingPath = filePath;
-    });
-  }
-
-  // 녹음 중지
-  Future<void> _stopRecording() async {
-    // 녹음 중지
-    await _recorder.stopRecorder();
-    // 녹음기 닫기
-    await _recorder.closeRecorder();
-    // 상태 업데이트
-    setState(() {
-      _isRecording = false;
-    });
+    //await uploadAndProcessAudio();
   }
 
   // 녹음 재생
@@ -146,11 +80,6 @@ class _RecordingState extends State<Recording> {
       //print('Result: $result');
 
       setState(() {
-        // if (message != null) {
-        //   _recognizedText = message;
-        // } else if (result == "") {
-        //   _recognizedText = result;
-        // }
         _recognizedText = result;
       });
     } catch (e) {
@@ -163,35 +92,18 @@ class _RecordingState extends State<Recording> {
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(
-              height: 50,
+          children: <Widget> [
+            ElevatedButton(
+                onPressed: Reqest,
+                child: const Text('Play Recording'),
             ),
-            Center(
-              child: _recognizedText != null
-                  ? Text(_recognizedText!)
-                  : Container(),
-            ),
-            _isRecording
-                ? ElevatedButton(
-              onPressed: Reqest,
-              child: const Text('Stop Recording'),
-            )
-                : ElevatedButton(
-              onPressed: Start,
-              child: const Text('Start Recording'),
-            ),
-            const SizedBox(height: 20),
-            _recordingPath.isNotEmpty
-                ? ElevatedButton(
-              onPressed: _playRecording,
-              child: const Text('Play Recording'),
-            )
-                : Container(),
-          ],
-        ),
-      ),
+            // Container(
+            //   width: 20,
+            //   child: Text(_recognizedText),
+            // ),
+          ]
+        )
+      )
     );
   }
 }
