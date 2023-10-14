@@ -1,46 +1,57 @@
 import 'package:flutter/material.dart';
-import 'demo/dnd.dart' as dnd;
-import 'demo/recording.dart' as recording;
+import 'demo/dnd.dart';
+import 'demo/magoS2t.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //String? selectedFilePath; // Variable to store selected file path
-
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Demo page'),
-        ),
-        body: Center(
+      theme: ThemeData(primarySwatch : Colors.blue,),
+      home: const Scaffold(
+        body: MyWidget(),
+      ),
+    );
+  }
+}
+
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Demo page'),
+      ),
+      body: const SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                height: 200,
-                width: 500,
-                child: dnd.ExampleDragTarget(
-                  // onFileSelected: (filePath) {
-                  //   selectedFilePath = filePath;
-                  // },
-                ),
+            children: [
+              SizedBox(
+                height: 50,
               ),
-              const SizedBox(height: 20),
-              Container(
-                height: 200,
-                width: 500,
-                child: recording.Recording(),//filePath: selectedFilePath),
+              Center(
+                child: ExampleDragTarget(),
               ),
+              SizedBox(
+                height: 50,
+              ),
+              // Center(
+              //   child: Container(
+              //     color: Colors.amber,
+              //     child: const Text('hello world'),
+              //   ),
+              // ),
             ],
-          ),
-        ),
-      ),
+          )
+      )
     );
   }
 }
