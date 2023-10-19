@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/comet.iml" filepath="$PROJECT_DIR$/comet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/comet_android.iml" filepath="$PROJECT_DIR$/android/comet_android.iml" />
     </modules>
   </component>
 </project>

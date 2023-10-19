@@ -1,62 +1,46 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'dart:typed_data';
+import 'dart:async';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-//
-// class magoS2t extends StatefulWidget {
-//   const magoS2t({super.key});
-//
-//   @override
-//   State<magoS2t> createState() => _magoS2tState();
-// }
-//
-// class _magoS2tState extends State<magoS2t> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(
-//       child: Text('hello world'),
-//     );
-//   }
-// }
 
 class MagoSttApi {
   String apiUrl;
-  String resultType = 'json';
+
+  String resultType = 'text';
+  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69';
 
   MagoSttApi(this.apiUrl);
 
   // 음성 인식 요청
-  Future<void> uploadAndProcessAudio(Uint8List fileBytes) async {
+  Future<String?> uploadAndProcessAudio(
+      Uint8List fileBytes, String audioFileName) async {
     // 음성 파일 업로드
     try {
       // 파일 업로드
-      String? id = await upload(fileBytes);
-      //print('Uploaded with ID: $id');
-
-      // upload에서 받아온 id를 넣어줌
-      String? message = await batch(id!);
-      //print('Batch Process: $message');
+      String? id = await upload(fileBytes, audioFileName);
+      print('S2T Uploaded with ID: $id');
 
       // 결과 가져오기
-      String? result = await getResult(id);
-      //print('Result: $result');
+      String? result = await getResult(id!);
 
+      return result;
     } catch (e) {
-      //print('Error: $e');
+      print('Error: $e');
     }
+    return null;
   }
 
-  Future<String?> upload(Uint8List audioData) async {
+  Future<String?> upload(Uint8List audioData, String fileName) async {
     try {
       var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/upload'))
         ..headers['accept'] = 'application/json'
+        ..headers['Bearer'] = key
+        ..headers['Content-Type'] = 'multipart/form-data'
         ..files.add(http.MultipartFile.fromBytes(
           'speech',
           audioData,
-          filename: 'audio.wav',
+          filename: fileName,
           contentType: MediaType('audio', 'wav'),
         ));
 
@@ -75,49 +59,27 @@ class MagoSttApi {
     return null;
   }
 
-  Future<String?> batch(String id) async {
-    try {
-      var request = await http.post(
-        Uri.parse('$apiUrl/batch/$id'),
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: '{"lang": "ko"}',
-      );
-
-      if (request.statusCode == 200) {
-        var responseBody = request.body;
-        String? message = getResultFromJson(responseBody, 'batch');
-        return message;
-      } else {
-        throw Exception('API request failed: ${request.statusCode}');
-      }
-    } catch (e) {
-      print('Error in batch request: $e');
-    }
-    return null;
-  }
-
   Future<String> getResult(String id) async {
     Completer<String> completer = Completer<String>();
-    final List<String> result = [""];
 
     Timer.periodic(const Duration(milliseconds: 300), (timer) async {
       try {
         var response = await http.get(
             Uri.parse('$apiUrl/result/$id?result_type=$resultType'),
-            headers: {'accept': 'application/json'});
+            headers: {
+              'accept': 'application/json',
+              'Bearer': key,
+            });
 
         if (response.statusCode == 200) {
           var responseBody = utf8.decode(response.bodyBytes);
-          result[0] = getResultFromJson(responseBody, 'result')!;
-          if (result[0] != "") {
+          var result = getResultFromJson(responseBody, 'result');
+          if (result != "") {
             timer.cancel();
-            completer.complete(result[0]);
+            completer.complete(result);
+          } else {
+            print('No result yet');
           }
-        } else {
-          throw Exception('API request failed: ${response.statusCode}');
         }
       } catch (e) {
         completer.completeError(e);
@@ -134,22 +96,19 @@ class MagoSttApi {
       Map<String, dynamic> contentsObject = jsonObject['contents'];
       String id = contentsObject['id'];
       return id;
-    } else if (status == 'batch') {
-      String message = jsonObject['message'];
-      return message;
     } else if (status == 'result') {
       Map<String, dynamic> contentsObject = jsonObject['contents'];
+      print(contentsObject);
       if (contentsObject.containsKey('results') == false) {
         return "";
       }
       Map<String, dynamic> resultsObject = contentsObject['results'];
-      if (resultsObject.containsKey('utterances') == false) {
+      if (resultsObject.containsKey('text') == false) {
         return "";
       }
-      String text = resultsObject['utterances'][0]['text'];
+      String text = resultsObject['text'];
       return text;
     }
     return null;
   }
 }
-
