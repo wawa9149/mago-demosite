@@ -1,3 +1,4 @@
+import 'package:comet/widget_design/appBar.dart';
 import 'package:flutter/material.dart';
 import 'apiRequestPage.dart';
 import 'demo/dnd.dart';
@@ -28,61 +29,42 @@ class MyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style = TextButton.styleFrom(
+    final ButtonStyle textButtonStyle = TextButton.styleFrom(
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
-      minimumSize: Size(100, 0),
+      minimumSize: Size(120, 0),
+      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
     );
     return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          Image.asset(
-            'assets/images/mago-word-dark.png',
-            height: 5,
-            width: 5,
-          ),
-          TextButton(
-            style: style,
-            onPressed: () {},
-            child: const Text('Action 1'),
-          ),
-          const VerticalDivider(
-            indent: 7,
-            endIndent: 7,
-            color: Colors.white, // 세로 선의 색상 조절
-            width: 1, // 세로 선의 두께 조절
-          ),
-          TextButton(
-            style: style,
-            onPressed: () {},
-            child: const Text('Action 2'),
-          ),
-          const VerticalDivider(
-            indent: 7,
-            endIndent: 7,
-            color: Colors.white, // 세로 선의 색상 조절
-            width: 1, // 세로 선의 두께 조절
-          ),
-          TextButton(
-            style: style,
-            onPressed: () {},
-            child: const Text('Action 3'),
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ApiRequestPage()),
-                );
-              },
-              child: const Text('데모 실행'),
+      appBar: AppBarMenu(textButtonStyle),
+      body: Align(
+        alignment: Alignment(-0.8, 0.55),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ApiRequestPage()),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size(250, 65),
+            textStyle:
+                const TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+            foregroundColor: Color.fromRGBO(49, 81, 63, 1),
+            backgroundColor: Colors.white,
+            // 버튼 텍스트의 색상을 흰색으로 설정
+            shadowColor: Colors.black,
+            elevation: 10,
+            // 그림자의 깊이를 나타냄
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
-          ],
+          ),
+          child: const Text(
+            'Get Started', // 표시할 텍스트
+            style: TextStyle(
+                fontSize: 25,
+                color: Color.fromRGBO(49, 81, 63, 1)), // 텍스트 스타일 조절
+          ),
         ),
       ),
     );

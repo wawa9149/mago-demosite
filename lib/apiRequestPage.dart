@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:comet/widget_design/appBar.dart';
 import 'demo/dnd.dart';
 
 class MyApp extends StatelessWidget {
@@ -22,54 +23,21 @@ class ApiRequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle textButtonStyle = TextButton.styleFrom(
+      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      minimumSize: Size(120, 0),
+      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+    );
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('MAGO Demo page'),
-      ),
-      body: SingleChildScrollView(
+      appBar: AppBarMenu(textButtonStyle),
+      body: const SingleChildScrollView(
         child: Center(
           child: Column(
             children: <Widget>[
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Expanded(
-                    child: MenuBar(
-                      children: <Widget>[
-                        SubmenuButton(
-                          menuChildren: <Widget>[
-                            MenuItemButton(
-                              onPressed: () {
-                                showAboutDialog(
-                                  context: context,
-                                  applicationName: 'MenuBar Sample',
-                                  applicationVersion: '1.0.0',
-                                );
-                              },
-                              child: const MenuAcceleratorLabel('&About'),
-                            ),
-                            MenuItemButton(
-                              onPressed: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Saved!'),
-                                  ),
-                                );
-                              },
-                              child: const MenuAcceleratorLabel('&Save'),
-                            ),
-                          ],
-                          child: const MenuAcceleratorLabel('&File'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
+              SizedBox(
                 height: 50,
               ),
-              const SingleChildScrollView(
+              SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Center(
                   child: ExampleDragTarget(),

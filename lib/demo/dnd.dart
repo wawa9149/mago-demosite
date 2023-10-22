@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:comet/demo/mago_s2t.dart';
 import 'package:comet/demo/mago_abm.dart';
 
+import '../apiResultPage.dart';
 import 'mago_emo.dart';
 
 class ExampleDragTarget extends StatefulWidget {
@@ -223,8 +224,14 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
         audioFile.isNotEmpty
             // 버튼을 누르면 음성 인식 요청
             ? ElevatedButton(
-                onPressed: () async =>
-                    await getApiResult(audioFile, audioFileName),
+                onPressed: () async {
+                  await getApiResult(audioFile, audioFileName);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ApiResultPage()),
+                  );
+                },
                 child: const Text('request'))
             : const Text('파일을 업로드 해주세요.'),
         const SizedBox(
