@@ -32,6 +32,7 @@ class MagoSttApi {
   }
 
   Future<String?> upload(Uint8List audioData, String fileName) async {
+    //print('audioData: $audioData, fileName: $fileName');
     try {
       var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/upload'))
         ..headers['accept'] = 'application/json'
@@ -45,6 +46,8 @@ class MagoSttApi {
         ));
 
       var response = await request.send();
+
+      print('respnse.stateCode: ${response.statusCode}');
 
       if (response.statusCode == 200) {
         var responseBody = await response.stream.bytesToString();
@@ -74,7 +77,7 @@ class MagoSttApi {
         if (response.statusCode == 200) {
           var responseBody = utf8.decode(response.bodyBytes);
           var result = getResultFromJson(responseBody, 'result');
-          if (result != "") {
+          if (result != null) {
             timer.cancel();
             completer.complete(result);
           } else {
@@ -98,15 +101,16 @@ class MagoSttApi {
       return id;
     } else if (status == 'result') {
       Map<String, dynamic> contentsObject = jsonObject['contents'];
-      print(contentsObject);
+      //print(contentsObject);
       if (contentsObject.containsKey('results') == false) {
-        return "";
+        return null;
       }
       Map<String, dynamic> resultsObject = contentsObject['results'];
       if (resultsObject.containsKey('text') == false) {
-        return "";
+        return null;
       }
       String text = resultsObject['text'];
+      print('S2T Result: $text');
       return text;
     }
     return null;

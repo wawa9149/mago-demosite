@@ -4,13 +4,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-class MagoABM {
+class MagoEMO {
   String apiUrl;
   String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69';
   String? id;
-  String resultType = 'all';
 
-  MagoABM(this.apiUrl);
+  MagoEMO(this.apiUrl);
 
   // 음성 인식 요청
   Future<String?> uploadAndProcessAudio(
@@ -19,30 +18,22 @@ class MagoABM {
     try {
       // 파일 업로드
       id = await upload(fileBytes, audioFileName);
-      print('ABM Uploaded with ID: $id');
+      print('EMO Uploaded with ID: $id');
 
       // 결과 가져오기
       String? result = await getResult(id!);
+      print(result);
 
       return result;
     } catch (e) {
-      print('ABM Error: $e');
+      print('EMO Error: $e');
     }
     return null;
   }
 
-  Future<Uint8List?> plotRequest(String featureName) async {
-    //print(featureName);
-    Uint8List? result = await plot(id!, featureName);
-    return result;
-  }
-
   Future<String?> upload(Uint8List audioData, String fileName) async {
     try {
-      var request = http.MultipartRequest(
-          'POST',
-          Uri.parse(
-              '$apiUrl/upload?task=ABM&readable=false&with_sequence=false&with_feats=true&plot_features=true'))
+      var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/upload'))
         ..headers['accept'] = 'application/json'
         ..headers['Bearer'] = key
         ..headers['Content-Type'] = 'multipart/form-data'
@@ -63,7 +54,7 @@ class MagoABM {
         print('Upload failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      print('ABM Error uploading file: $e');
+      print('EMO Error uploading file: $e');
     }
     return null;
   }
@@ -73,18 +64,17 @@ class MagoABM {
     // Results are not immediately available, so we poll the API until we get a result
     Timer.periodic(const Duration(milliseconds: 300), (timer) async {
       try {
-        var response = await http.get(
-            Uri.parse('$apiUrl/result/$id?result_type=$resultType'),
-            headers: {
-              'accept': 'application/json',
-              'Bearer': key,
-            });
+        var response =
+        await http.get(Uri.parse('$apiUrl/result/$id'), headers: {
+          'accept': 'application/json',
+          'Bearer': key,
+        });
 
-        print('ABM response.statusCode: ${response.statusCode}');
+        print('EMO response.statusCode: ${response.statusCode}');
         if (response.statusCode == 200) {
           var responseBody = utf8.decode(response.bodyBytes);
           var result = getResultFromJson(responseBody, 'result');
-          if (result != "") {
+          if (result != null) {
             timer.cancel();
             completer.complete(result);
           } else {
@@ -92,56 +82,31 @@ class MagoABM {
           }
         }
       } catch (e) {
-        completer.completeError(e);
+          completer.completeError(e);
       }
     });
 
     return completer.future;
   }
 
-  Future<Uint8List?> plot(String id, String featureName) async {
-    var response = await http
-        .get(Uri.parse('$apiUrl/plot/$id?feature_name=$featureName'), headers: {
-      'accept': 'application/json',
-      'Bearer': key,
-    });
-
-    if (response.statusCode == 200) {
-      return response.bodyBytes; // 이미지 바이트 데이터를 직접 사용
-    } else {
-      print('Plot failed with status: ${response.statusCode}');
-    }
-    return null;
-  }
-
   String? getResultFromJson(String jsonResponse, String status) {
     Map<String, dynamic> jsonObject = json.decode(jsonResponse);
 
-    // status에 따라서 다른 결과를 반환
     if (status == 'upload') {
       Map<String, dynamic> contentsObject = jsonObject['contents'];
       String id = contentsObject['id'];
       return id;
     } else if (status == 'result') {
-      try {
-        Map<String, dynamic> contentsObject = jsonObject['contents'];
-        if (contentsObject.containsKey('results')) {
-          Map<String, dynamic> results = contentsObject['results'];
-          if (results.containsKey('biomarkers') &&
-              results['biomarkers'] is Map<String, dynamic>) {
-            String contentsJsonString = json.encode(results['biomarkers']);
-
-            return contentsJsonString;
-          } else {
-            return "";
-          }
-        } else {
-          return "";
-        }
-      } catch (e) {
-        print('Error parsing result: $e');
+      Map<String, dynamic> contentsObject = jsonObject['contents'];
+      if (contentsObject.containsKey('results') == false) {
         return null;
       }
+      Map<String, dynamic> resultsObject = contentsObject['results'];
+      if (resultsObject.containsKey('utterances') == false) {
+        return null;
+      }
+      String nbest = json.encode(resultsObject['utterances'][0]['nbest']);
+      return nbest;
     }
     return null;
   }

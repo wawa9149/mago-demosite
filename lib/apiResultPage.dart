@@ -1,93 +1,67 @@
-import 'package:flutter/material.dart';
+import 'dart:typed_data';
+
 import 'package:comet/widget_design/appBar.dart';
-import 'demo/dnd.dart';
+import 'package:comet/widget_design/textResultBox.dart';
+import 'package:flutter/material.dart';
+import 'package:comet/api/mago_abm.dart';
+
 import 'demo/graphWidget.dart';
+import 'demo/imageResult.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Scaffold(
-        body: ApiResultPage(),
-      ),
-    );
-  }
-}
 
 class ApiResultPage extends StatelessWidget {
-  const ApiResultPage({super.key});
+  ApiResultPage({required this.result, Key? key}) : super(key: key);
+
+  List<String?> result = [];
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final ButtonStyle textButtonStyle = TextButton.styleFrom(
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       minimumSize: Size(120, 0),
       padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
     );
+
     return Scaffold(
       appBar: AppBarMenu(textButtonStyle),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Expanded(
-                    child: MenuBar(
-                      children: <Widget>[
-                        SubmenuButton(
-                          menuChildren: <Widget>[
-                            MenuItemButton(
-                              onPressed: () {
-                                showAboutDialog(
-                                  context: context,
-                                  applicationName: 'MenuBar Sample',
-                                  applicationVersion: '1.0.0',
-                                );
-                              },
-                              child: const MenuAcceleratorLabel('&About'),
-                            ),
-                            MenuItemButton(
-                              onPressed: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Saved!'),
-                                  ),
-                                );
-                              },
-                              child: const MenuAcceleratorLabel('&Save'),
-                            ),
-                          ],
-                          child: const MenuAcceleratorLabel('&File'),
-                        ),
-                      ],
-                    ),
-                  ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 100,
+              ),
+              GraphResult(result: result,),
+              SizedBox(
+                height: 100,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('<음성 인식 결과>', style:
+                  TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 20),
+                  TextResultBox(result[0] ?? 'N/A'),
+                  SizedBox(height: 50),
+                  Text('<Acoustic BioMarker 결과>', style:
+                  TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 20),
+                  TextResultBox(result[1] ?? 'N/A'),
+                  SizedBox(height: 50),
+                  Text('<감정 인식 결과>', style:
+                  TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 20),
+                  TextResultBox(result[2] ?? 'N/A'),
                 ],
               ),
               const SizedBox(
                 height: 50,
               ),
-              const SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Center(
-                  // child: ExampleDragTarget(),
-                ),
-              ),
-              SizedBox(
+              ImageResult(id: result[3]),
+              const SizedBox(
                 height: 50,
-              ),
-              Center(),
-              Container(
-                  width: 500,
-                  height: 500,
-                  child: Mygraph()
               ),
             ],
           ),

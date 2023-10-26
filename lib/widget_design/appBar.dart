@@ -6,7 +6,7 @@ AppBar AppBarMenu(ButtonStyle textButtonStyle) {
     backgroundColor: Color.fromRGBO(49, 81, 63, 1),
     actions: <Widget>[
       Padding(
-        padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
+        padding: EdgeInsets.fromLTRB(60, 0, 0, 0),
         child: Image.asset(
           'assets/images/mago-word-dark.png',
           color: Colors.white,
