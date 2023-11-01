@@ -1,0 +1,29 @@
+# MAGO acoustic biomarkers service
+services:
+   mago-demo:
+    image: mago-demo:latest
+    container_name:  mago-demo
+    environment:
+      - LC_ALL=C.UTF-8
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    cap_add:
+      - SYS_ADMIN
+    ports:
+      - 9149:80
+    entrypoint: ["nginx", "-g", "daemon off;"]
+
+
+
+
+
+
+
+
+
+
