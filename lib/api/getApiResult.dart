@@ -1,13 +1,15 @@
 import 'dart:typed_data';
 
+import 'package:flutter/cupertino.dart';
+
 import 'mago_abm.dart';
 import 'mago_emo.dart';
 import 'mago_s2t.dart';
 
 class GetApiResult {
-  var magoStt = MagoSttApi('http://saturn.mago52.com:9003/speech2text'); // API 객체
-  var magoABM = MagoABM('http://saturn.mago52.com:9104/abm'); // API 객체
-  var magoEMO = MagoEMO('http://saturn.mago52.com:9105/emo'); // API 객체
+  var magoS2t = MagoS2T('https://s2t.magostar.com/speech2text'); // API 객체
+  var magoABM = MagoABM('https://abm.magostar.com/abm'); // API 객체
+  var magoEMO = MagoEMO('https://emo.magostar.com/emo'); // API 객체
 
   // late String? s2tRequestResult = '';
   // late String? abmRequestResult = '';
@@ -20,8 +22,9 @@ class GetApiResult {
 
   // API 요청
   Future<List<String?>> getApiResult() async {
+    print('요청: getApiResult');
     List<Future<String?>> futures = [
-      magoStt.uploadAndProcessAudio(audioData, audioFileName),
+      magoS2t.uploadAndProcessAudio(audioData, audioFileName),
       magoABM.uploadAndProcessAudio(audioData, audioFileName),
       magoEMO.uploadAndProcessAudio(audioData, audioFileName),
       magoABM.upload(audioData, audioFileName), //같은 파일의 id가 필요하기 때문에 처음 파일 요청할때 같이 요청

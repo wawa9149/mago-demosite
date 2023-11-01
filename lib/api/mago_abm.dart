@@ -9,7 +9,7 @@ import 'package:comet/demo/imageResult.dart';
 class MagoABM {
   String apiUrl;
   String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69';
-  String id = '';
+  String? id;
   String resultType = 'all';
 
   MagoABM(this.apiUrl);
@@ -20,7 +20,7 @@ class MagoABM {
     // 음성 파일 업로드
     try {
       // 파일 업로드
-      id = (await upload(fileBytes, audioFileName))!;
+      id = await upload(fileBytes, audioFileName);
       print('ABM Uploaded with ID: $id');
 
       // 결과 가져오기
@@ -41,7 +41,7 @@ class MagoABM {
     return result;
   }
 
-  String getId() {
+  String? getId() {
     return id;
   }
 
@@ -58,7 +58,7 @@ class MagoABM {
           'file',
           audioData,
           filename: fileName,
-          contentType: MediaType('audio', 'wav'),
+          contentType: MediaType('audio', 'flac'),
         ));
 
       var response = await request.send();
@@ -79,7 +79,7 @@ class MagoABM {
   Future<String> getResult(String id) async {
     Completer<String> completer = Completer<String>();
     // Results are not immediately available, so we poll the API until we get a result
-    Timer.periodic(const Duration(milliseconds: 300), (timer) async {
+    Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
       try {
         var response = await http.get(
             Uri.parse('$apiUrl/result/$id?result_type=$resultType'),
@@ -91,9 +91,10 @@ class MagoABM {
         print('ABM response.statusCode: ${response.statusCode}');
         if (response.statusCode == 200) {
           var responseBody = utf8.decode(response.bodyBytes);
-          var result = getResultFromJson(responseBody, 'result');
+          String? result = getResultFromJson(responseBody, 'result');
           if (result != null) {
             timer.cancel();
+            print(result);
             completer.complete(result);
           } else {
             print('No result yet');
@@ -115,6 +116,7 @@ class MagoABM {
     });
 
     if (response.statusCode == 200) {
+      print('response.bodyBytes: ${response.bodyBytes}');
       return response.bodyBytes; // 이미지 바이트 데이터를 직접 사용
     } else {
       print('Plot failed with status: ${response.statusCode}');
@@ -133,19 +135,23 @@ class MagoABM {
     } else if (status == 'result') {
       try {
         Map<String, dynamic> contentsObject = jsonObject['contents'];
-        print('ABM contentsObject: ok');
+        //print('ABM contentsObject: ok');
         if (contentsObject.containsKey('results')) {
           Map<String, dynamic> results = contentsObject['results'];
-          print('ABM results: ok');
+          //print('ABM results: ok');
           if (results.containsKey('biomarkers') &&
               results['biomarkers'] is Map<String, dynamic>) {
-            print('ABM biomarkers: ok');
+            //print('ABM biomarkers: ok');
             String contentsJsonString = json.encode(results['biomarkers']);
-            print('ABM contentsJsonString: $contentsJsonString');
+            //print('ABM contentsJsonString: $contentsJsonString');
             return contentsJsonString;
           } else {
-            return null;
+            String message = 'Failed to get biomarkers';
+            return message;
           }
+        } else if(contentsObject.containsKey('detail')){
+          String message = '실패';
+          return message;
         } else {
           return null;
         }

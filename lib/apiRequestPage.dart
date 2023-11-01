@@ -12,22 +12,24 @@ class ApiRequestPage extends StatelessWidget {
       minimumSize: Size(120, 0),
       padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
     );
-    return Scaffold(
-      appBar: AppBarMenu(textButtonStyle),
-      body: const SingleChildScrollView(
-        child: Center(
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.fitWidth,
+          alignment: Alignment.bottomCenter,
+          image: AssetImage('assets/images/background_file.png'), // 배경 이미지
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent, // 배경색을 투명으로 설정
+        appBar: AppBarMenu(textButtonStyle),
+        body: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: 50,
-              ),
+            children: [
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                  child: ExampleDragTarget(),
-              ),
-              SizedBox(
-                height: 50,
+                child: ExampleDragTarget(),
               ),
             ],
           ),

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:comet/api/getApiResult.dart';
@@ -119,11 +120,12 @@ class ImageResultState extends State<ImageResult> {
       print('widget.id: ${widget.id}');
       Uint8List? imageBytes = await magoABM.plotRequest(
           features[_selectedFeatures.indexOf(true)].toString(), widget.id!);
+      print('imageBytes: $imageBytes');
+      print('2');
       return imageBytes;
     } catch (e) {
       print('Error requesting image: $e');
       return null;
     }
   }
-
 }

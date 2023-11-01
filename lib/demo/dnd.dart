@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:html' as html;
 import 'dart:html';
 import 'dart:io' as io;
@@ -31,28 +32,27 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
   late Uint8List audioFile = Uint8List(0);
   late String audioFilePath = '';
   late String audioFileName = '';
-  bool _isUploading = false;
 
-  ///FUNCTION UPLOAD the file to the storage
-  Future<void> uploadFile(Uint8List data, String extension) async {
-    ///Start uploading
-    firebase_storage.Reference reference = firebase_storage
-        .FirebaseStorage.instance
-        .ref('docs/namefile.$extension');
-
-    ///Show the status of the upload
-    firebase_storage.TaskSnapshot uploadTask = await reference.putData(data);
-
-    ///Get the download url of the file
-    String url = await uploadTask.ref.getDownloadURL();
-
-    if (uploadTask.state == firebase_storage.TaskState.success) {
-      print('done');
-      print('URL: $url');
-    } else {
-      print(uploadTask.state);
-    }
-  }
+  // ///FUNCTION UPLOAD the file to the storage
+  // Future<void> uploadFile(Uint8List data, String extension) async {
+  //   ///Start uploading
+  //   firebase_storage.Reference reference = firebase_storage
+  //       .FirebaseStorage.instance
+  //       .ref('docs/namefile.$extension');
+  //
+  //   ///Show the status of the upload
+  //   firebase_storage.TaskSnapshot uploadTask = await reference.putData(data);
+  //
+  //   ///Get the download url of the file
+  //   String url = await uploadTask.ref.getDownloadURL();
+  //
+  //   if (uploadTask.state == firebase_storage.TaskState.success) {
+  //     print('done');
+  //     print('URL: $url');
+  //   } else {
+  //     print(uploadTask.state);
+  //   }
+  // }
 
   // 드래그 영역
   Container makeDropZone() {
@@ -75,10 +75,8 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(
-            height: 50,
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -87,6 +85,7 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
                 style: TextStyle(
                   color: color,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'NEXONLv1GothicBold',
                   fontSize: 25,
                 ),
               ),
@@ -96,6 +95,7 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
                   // fontWeight: FontWeight.bold,
                   color: color,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'NEXONLv1GothicBold',
                   fontSize: 25,
                 ),
               ),
@@ -104,6 +104,7 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
                 style: TextStyle(
                   color: color!,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'NEXONLv1GothicBold',
                   fontSize: 25,
                 ),
               ),
@@ -154,11 +155,12 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
                     if (result != null && result.files.isNotEmpty) {
                       audioFileName = result.files.first.name;
                       audioFile = result.files.first.bytes!;
-                      print('실행');
-                      uploadFile(result.files.first.bytes!, result.files.first.extension!);
+                      log('실행');
+                      //uploadFile(result.files.first.bytes!, result.files.first.extension!);
 
                       setState(() {
                         showFileName = "Now File Name: $audioFileName";
+                        log('file');
                       });
                     }
                   },
@@ -183,6 +185,7 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
                         "or Browse Files",
                         style: TextStyle(
                           color: Colors.grey[600]!,
+                          fontFamily: 'NEXONLv1GothicBold',
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
@@ -209,99 +212,102 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          '음성 파일 업로드',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            '음성 파일 업로드',
+            style: TextStyle(
+              fontFamily: 'NanumSquare_EB',
+              fontWeight: FontWeight.bold,
+              fontSize: 40,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        // 드래그 영역
-        DropTarget(
-          onDragDone: (detail) async {
-            debugPrint('onDragDone:');
-            if (detail.files.isNotEmpty) {
-              audioFileName = detail.files.first.name;
-              audioFile = await detail.files.first.readAsBytes();
+          const SizedBox(
+            height: 30,
+          ),
+          // 드래그 영역
+          DropTarget(
+            onDragDone: (detail) async {
+              debugPrint('onDragDone:');
+              if (detail.files.isNotEmpty) {
+                audioFileName = detail.files.first.name;
+                audioFile = await detail.files.first.readAsBytes();
+                setState(() {
+                  showFileName = "Now File Name: $audioFileName";
+                });
+              }
+            },
+            onDragEntered: (detail) {
               setState(() {
-                showFileName = "Now File Name: $audioFileName";
+                debugPrint('onDragEntered:');
+                _dragging = true;
               });
-            }
-          },
-          onDragEntered: (detail) {
-            setState(() {
-              debugPrint('onDragEntered:');
-              _dragging = true;
-            });
-          },
-          onDragExited: (detail) {
-            debugPrint('onDragExited:');
-            setState(() {
-              _dragging = false;
-            });
-          },
-          child: makeDropZone(),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        // 요청 버튼
-        Container(
-          width: 200,
-          height: 50,
-          child: audioFile.isNotEmpty
-              // 버튼을 누르면 음성 인식 요청
-              ? ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FutureBuilder<List<String?>>(
-                          future: GetApiResult(audioFile, audioFileName)
-                              .getApiResult(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              // 로딩 중일 때 표시할 위젯 (로딩창)
-                              return Center(child: LoadingPage());
-                            } else if (snapshot.hasError) {
-                              // 에러 발생 시 표시할 위젯
-                              return Center(
-                                  child: Text('에러 발생: ${snapshot.error}'));
-                            } else if (snapshot.hasData) {
-                              // 데이터를 받아왔을 때 표시할 위젯
-                              return ApiResultPage(result: snapshot.data!);
-                            } else {
-                              // 다른 예외 상황 처리 (데이터가 없는 경우 등)
-                              return Center(child: Text('예외 상황 처리'));
-                            }
-                          },
+            },
+            onDragExited: (detail) {
+              debugPrint('onDragExited:');
+              setState(() {
+                _dragging = false;
+              });
+            },
+            child: makeDropZone(),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          // 요청 버튼
+          Container(
+            width: 200,
+            height: 50,
+            child: audioFile.isNotEmpty
+                // 버튼을 누르면 음성 인식 요청
+                ? ElevatedButton(
+                    onPressed: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FutureBuilder<List<String?>>(
+                            future: GetApiResult(audioFile, audioFileName)
+                                .getApiResult(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                // 로딩 중일 때 표시할 위젯 (로딩창)
+                                return Center(child: LoadingPage());
+                              } else if (snapshot.hasError) {
+                                // 에러 발생 시 표시할 위젯
+                                return Center(
+                                    child: Text('에러 발생: ${snapshot.error}'));
+                              } else if (snapshot.hasData) {
+                                // 데이터를 받아왔을 때 표시할 위젯
+                                return ApiResultPage(result: snapshot.data!);
+                              } else {
+                                // 다른 예외 상황 처리 (데이터가 없는 경우 등)
+                                return Center(child: Text('예외 상황 처리'));
+                              }
+                            },
+                          ),
                         ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(71, 105, 31, 0.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(71, 105, 31, 0.5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
                     ),
-                  ),
-                  child: const Text(
-                    '결과 확인',
-                    style: TextStyle(
-                      fontSize: 20,
+                    child: const Text(
+                      '결과 확인',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                )
-              : Container(),
-        ),
-      ],
+                  )
+                : Container(),
+          ),
+        ],
+      ),
     );
   }
 }

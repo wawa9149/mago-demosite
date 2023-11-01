@@ -41,7 +41,7 @@ class MagoEMO {
           'file',
           audioData,
           filename: fileName,
-          contentType: MediaType('audio', 'wav'),
+          contentType: MediaType('audio', 'flac'),
         ));
 
       var response = await request.send();
@@ -62,7 +62,7 @@ class MagoEMO {
   Future<String> getResult(String id) async {
     Completer<String> completer = Completer<String>();
     // Results are not immediately available, so we poll the API until we get a result
-    Timer.periodic(const Duration(milliseconds: 300), (timer) async {
+    Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
       try {
         var response =
         await http.get(Uri.parse('$apiUrl/result/$id'), headers: {
@@ -105,8 +105,13 @@ class MagoEMO {
       if (resultsObject.containsKey('utterances') == false) {
         return null;
       }
-      String nbest = json.encode(resultsObject['utterances'][0]['nbest']);
-      return nbest;
+      String result = json.encode(resultsObject['utterances']);
+      return result;
+      // if (resultsObject.containsKey('utterances') == false) {
+      //   return null;
+      // }
+      // String nbest = json.encode(resultsObject['utterances'][0]['nbest']);
+      // return nbest;
     }
     return null;
   }

@@ -29,10 +29,10 @@ class _GraphResultState extends State<GraphResult> {
         Map<String, dynamic> contentsObject = jsonObject['energy'];
         print(contentsObject);
         print('ABM energy: ok');
-        double scaledRMS = (contentsObject['rms'] * 10);
+        double scaledRMS = (contentsObject['rms']);
 
         // 소수점 1자리까지 나타내는 문자열로 변환
-        scaledRMSString = scaledRMS.toStringAsFixed(1);
+        scaledRMSString = scaledRMS.toStringAsFixed(2);
 
         // 다시 double로 파싱
         double rms = double.parse(scaledRMSString);
@@ -75,96 +75,139 @@ class _GraphResultState extends State<GraphResult> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          height: 250,
-          width: 250,
-            child: SfRadialGauge(axes: <RadialAxis>[
-          RadialAxis(minimum: 0, maximum: 0.3, ranges: <GaugeRange>[
-            GaugeRange(startValue: 0, endValue: 0.1, color: Color.fromRGBO(228, 233, 190, 0.5)),
-            GaugeRange(startValue: 0.1, endValue: 0.3, color: Color.fromRGBO(49, 81, 63, 1))
-          ], pointers: <GaugePointer>[
-            NeedlePointer(value: getResultFromJson('rms')!)
-          ], annotations: <GaugeAnnotation>[
-            GaugeAnnotation(
-                widget: Container(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Text(scaledRMSString,
-                        style:
-                            TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                    Text("음성 크기",
-                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold))
-                  ],
-                )),
-                angle: 90,
-                positionFactor: 0.5)
-          ])
-        ])),
-      SizedBox(width: 50,),
-      Container(
-          height: 250,
-          width: 250,
-          child: SfRadialGauge(axes: <RadialAxis>[
-            RadialAxis(minimum: -5, maximum: 20, ranges: <GaugeRange>[
-              GaugeRange(startValue: -5, endValue: 0, color: Color.fromRGBO(228, 233, 190, 0.5)),
-              GaugeRange(startValue: 0, endValue: 5, color: Color.fromRGBO(188, 193, 150, 1)),
-              GaugeRange(startValue: 5, endValue: 10, color: Color.fromRGBO(89, 121, 80, 1)),
-              GaugeRange(startValue: 10, endValue: 20, color: Color.fromRGBO(49, 81, 63, 1))
-            ], pointers: <GaugePointer>[
-              NeedlePointer(value: getResultFromJson('snr')!)
-            ], annotations: <GaugeAnnotation>[
-              GaugeAnnotation(
-                  widget: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                          ),
-                          Text(scaledSNRString,
-                              style:
-                              TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                          Text("노이즈",
-                              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold))
-                        ],
-                      )),
-                  angle: 90,
-                  positionFactor: 0.5)
-            ])
-          ])),
+            height: 250,
+            width: 250,
+            child: SfRadialGauge(
+                enableLoadingAnimation: true, animationDuration: 4500,
+                axes: <RadialAxis>[
+                  RadialAxis(
+                      minimum: 0,
+                      maximum: 0.3,
+                      ranges: <GaugeRange>[
+                        GaugeRange(startValue: 0,
+                            endValue: 0.1,
+                            color: Color.fromRGBO(228, 233, 190, 0.5)),
+                        GaugeRange(startValue: 0.1,
+                            endValue: 0.3,
+                            color: Color.fromRGBO(49, 81, 63, 1))
+                      ],
+                      pointers: <GaugePointer>[
+                        NeedlePointer(value: getResultFromJson('rms')!)
+                      ],
+                      annotations: <GaugeAnnotation>[
+                        GaugeAnnotation(
+                            widget: Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 50,
+                                    ),
+                                    Text(scaledRMSString,
+                                        style:
+                                        TextStyle(fontSize: 25,
+                                            fontWeight: FontWeight.bold)),
+                                    Text("음성 크기",
+                                        style: TextStyle(fontSize: 28,
+                                            fontWeight: FontWeight.bold))
+                                  ],
+                                )),
+                            angle: 90,
+                            positionFactor: 0.5)
+                      ])
+                ])),
         SizedBox(width: 50,),
         Container(
             height: 250,
             width: 250,
-            child: SfRadialGauge(axes: <RadialAxis>[
-              RadialAxis(minimum: 0, maximum: 150, ranges: <GaugeRange>[
-                GaugeRange(startValue: 0, endValue: 15, color: Color.fromRGBO(228, 233, 190, 0.5)),
-                GaugeRange(startValue: 15, endValue: 75, color: Color.fromRGBO(89, 121, 80, 1)),
-                GaugeRange(startValue: 75, endValue: 150, color: Color.fromRGBO(49, 81, 63, 1)),
-              ], pointers: <GaugePointer>[
-                NeedlePointer(value: getResultFromJson('shimmer')!)
-              ], annotations: <GaugeAnnotation>[
-                GaugeAnnotation(
-                    widget: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 50,
-                            ),
-                            Text(scaledRMSString,
-                                style:
-                                TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                            Text("발성",
-                                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold))
-                          ],
-                        )),
-                    angle: 90,
-                    positionFactor: 0.5)
-              ])
+            child: SfRadialGauge(
+                enableLoadingAnimation: true, animationDuration: 4500,
+                axes: <RadialAxis>[
+              RadialAxis(minimum: -5,
+                  maximum: 20,
+                  ranges: <GaugeRange>[
+                    GaugeRange(startValue: -5,
+                        endValue: 0,
+                        color: Color.fromRGBO(228, 233, 190, 0.5)),
+                    GaugeRange(startValue: 0,
+                        endValue: 5,
+                        color: Color.fromRGBO(188, 193, 150, 1)),
+                    GaugeRange(startValue: 5,
+                        endValue: 10,
+                        color: Color.fromRGBO(89, 121, 80, 1)),
+                    GaugeRange(startValue: 10,
+                        endValue: 20,
+                        color: Color.fromRGBO(49, 81, 63, 1))
+                  ],
+                  pointers: <GaugePointer>[
+                    NeedlePointer(value: getResultFromJson('snr')!)
+                  ],
+                  annotations: <GaugeAnnotation>[
+                    GaugeAnnotation(
+                        widget: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                ),
+                                Text(scaledSNRString,
+                                    style:
+                                    TextStyle(fontSize: 25,
+                                        fontWeight: FontWeight.bold)),
+                                Text("노이즈",
+                                    style: TextStyle(fontSize: 28,
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            )),
+                        angle: 90,
+                        positionFactor: 0.5)
+                  ])
+            ])),
+        SizedBox(width: 50,),
+        Container(
+            height: 250,
+            width: 250,
+            child: SfRadialGauge(
+                enableLoadingAnimation: true, animationDuration: 4500,
+                axes: <RadialAxis>[
+              RadialAxis(minimum: 0,
+                  maximum: 150,
+                  ranges: <GaugeRange>[
+                    GaugeRange(startValue: 0,
+                        endValue: 15,
+                        color: Color.fromRGBO(228, 233, 190, 0.5)),
+                    GaugeRange(startValue: 15,
+                        endValue: 75,
+                        color: Color.fromRGBO(89, 121, 80, 1)),
+                    GaugeRange(startValue: 75,
+                        endValue: 150,
+                        color: Color.fromRGBO(49, 81, 63, 1)),
+                  ],
+                  pointers: <GaugePointer>[
+                    NeedlePointer(value: getResultFromJson('shimmer')!)
+                  ],
+                  annotations: <GaugeAnnotation>[
+                    GaugeAnnotation(
+                        widget: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                ),
+                                Text(scaledRMSString,
+                                    style:
+                                    TextStyle(fontSize: 25,
+                                        fontWeight: FontWeight.bold)),
+                                Text("발성",
+                                    style: TextStyle(fontSize: 28,
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            )),
+                        angle: 90,
+                        positionFactor: 0.5)
+                  ])
             ])),
       ],
     );
