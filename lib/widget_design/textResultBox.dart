@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Container TextResultBox(String? result) {
   return Container(
-    height: 200,
+    height: 300,
     width: 800,
     padding: EdgeInsets.all(16.0),
     decoration: BoxDecoration(
@@ -20,8 +20,19 @@ Container TextResultBox(String? result) {
     child: SingleChildScrollView(
       // 스크롤 가능
       child: Center(
-        child: Text(result!, style: TextStyle(fontSize: 15,)), // 결과 출력
+        //child: Text(result!, style: TextStyle(fontSize: 15,)), // 결과 출력
+        child: Text(resultCheck(result), style: TextStyle(fontSize: 15,)), // 결과 출력
       ),
     ),
   );
+}
+
+String resultCheck(String? result){
+  if(result == null){
+    return 'N/A';
+  }
+  else{
+    print('result: $result');
+    return result;
+  }
 }

@@ -32,59 +32,52 @@ class ApiResultPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 100,
+              const SizedBox(
                 height: 100,
-                decoration: const BoxDecoration(
-                  color: Colors.red, // 배경색
-                ),
-              )
-              // const SizedBox(
-              //   height: 100,
-              // ),
-              // GraphResult(
-              //   result: result,
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     RadialBarChartSample(),
-              //     ColumnRounded(),
-              //   ],
-              // ),
-              // MultipleAxesChart(),
-              // SizedBox(
-              //   height: 100,
-              // ),
-              // Column(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Text('<음성 인식 결과>',
-              //         style:
-              //             TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              //     SizedBox(height: 20),
-              //     TextResultBox(result[0] ?? 'N/A'),
-              //     SizedBox(height: 50),
-              //     Text('<Acoustic BioMarker 결과>',
-              //         style:
-              //             TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              //     SizedBox(height: 20),
-              //     TextResultBox(result[1] ?? 'N/A'),
-              //     SizedBox(height: 50),
-              //     Text('<감정 인식 결과>',
-              //         style:
-              //             TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              //     SizedBox(height: 20),
-              //     TextResultBox(result[2] ?? 'N/A'),
-              //   ],
-              // ),
+              ),
+              GraphResult(
+                result: result,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RadialBarChartSample(),
+                  ColumnRounded(),
+                ],
+              ),
+              MultipleAxesChart(),
+              SizedBox(
+                height: 100,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('<음성 인식 결과>',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 20),
+                  TextResultBox(result[0] ?? 'N/A'),
+                  SizedBox(height: 50),
+                  Text('<Acoustic BioMarker 결과>',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 20),
+                  TextResultBox(result[1] ?? 'N/A'),
+                  SizedBox(height: 50),
+                  Text('<감정 인식 결과>',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 20),
+                  TextResultBox(result[2] ?? 'N/A'),
+                ],
+              ),
               // const SizedBox(
               //   height: 50,
               // ),
               // ImageResult(id: result[3]),
-              // const SizedBox(
-              //   height: 50,
-              // ),
+              const SizedBox(
+                height: 50,
+              ),
             ],
           ),
         ),
