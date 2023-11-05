@@ -33,13 +33,13 @@ class MagoABM {
     return null;
   }
 
-  Future<Uint8List?> plotRequest(String featureName, String plotId) async {
-    print(featureName);
-    print('plotId: $plotId');
-    Uint8List? result = await plot(plotId!, featureName);
-
-    return result;
-  }
+  // Future<Uint8List?> plotRequest(String featureName, String plotId) async {
+  //   print(featureName);
+  //   print('plotId: $plotId');
+  //   Uint8List? result = await plot(plotId!, featureName);
+  //
+  //   return result;
+  // }
 
   String? getId() {
     return id;

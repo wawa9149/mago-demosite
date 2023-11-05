@@ -21,6 +21,9 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_local_notifications-16.1.0" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers-5.2.0" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers_web-4.1.0" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio_web-0.4.8" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audio_session-0.1.16" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio-0.9.35" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

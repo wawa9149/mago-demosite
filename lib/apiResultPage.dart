@@ -35,7 +35,7 @@ class ApiResultPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            AudioPlayerWidget(audioSource: audioSource,),
+            //AudioPlayerWidget(audioSource: audioSource,),
               const SizedBox(
                 height: 100,
               ),
@@ -75,10 +75,10 @@ class ApiResultPage extends StatelessWidget {
                   TextResultBox(result[2] ?? 'N/A'),
                 ],
               ),
-              // const SizedBox(
-              //   height: 50,
-              // ),
-              // ImageResult(id: result[3]),
+              const SizedBox(
+                height: 50,
+              ),
+              //ImageResult(id: result[3]),
               const SizedBox(
                 height: 50,
               ),
