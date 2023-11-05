@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 
+import '../widget_design/audioPlayer.dart';
 import 'mago_abm.dart';
 import 'mago_emo.dart';
 import 'mago_s2t.dart';

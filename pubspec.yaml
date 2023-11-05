@@ -42,8 +42,11 @@ dependencies:
   webdev: ^3.0.6 #for web
   archive: ^3.1.2 #for zip
   flutter_sound: ^9.2.13
-  #get: ^4.6.6 #for state management
+  audioplayers: ^5.2.0
+  get: ^4.6.6 #for state management
   fl_chart: ^0.64.0
+  flutter_local_notifications: ^16.1.0 #for notification
+  just_audio: ^0.9.11 #for audio
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -52,9 +55,10 @@ dependencies:
   syncfusion_flutter_gauges: ^23.1.42
   #firebase_analytics: ^10.6.1
 
-  cloud_firestore: ^4.12.0
-  firebase_storage: ^11.4.0
-  firebase_core: ^2.20.0
+  #cloud_firestore: ^4.12.0
+  #firebase_storage: ^11.4.0
+  #firebase_core: ^2.20.0
+
   syncfusion_flutter_charts: ^23.1.42
   syncfusion_flutter_pdf: ^23.1.42
 

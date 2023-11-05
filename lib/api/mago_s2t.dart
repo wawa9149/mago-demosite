@@ -76,9 +76,9 @@ class MagoS2T {
         if (response.statusCode == 200) {
           // var utf16CodeUnits = response.bodyBytes.buffer.asUint16List();
           // var responseBody = String.fromCharCodes(utf16CodeUnits);
-          var responseBody = utf8.decode(response.bodyBytes);
-          var result = getResultFromJson(responseBody, 'result');
-          //String result = jsonEncode(response.bodyBytes);
+          // var responseBody = utf8.decode(response.bodyBytes);
+          // var result = getResultFromJson(responseBody, 'result');
+          String result = jsonEncode(response.bodyBytes);
           if (result != null) {
             timer.cancel();
             completer.complete(result);
@@ -107,7 +107,7 @@ class MagoS2T {
       if (contentsObject.containsKey('results') == false) {
         return null;
       }
-      String result = contentsObject['results'];
+      String result = json.encode(contentsObject['results']);
       print('S2T Result: $result');
       return result;
       //Map<String, dynamic> resultsObject = contentsObject['results'];

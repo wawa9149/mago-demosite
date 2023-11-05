@@ -1,6 +1,9 @@
 import 'package:comet/widget_design/appBar.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'apiRequestPage.dart';
 //import 'firebase_options.dart';
 
@@ -10,7 +13,7 @@ void main() async {
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
   print('시작');
-  runApp(const MyApp());
+  runApp(const GetMaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -75,11 +78,12 @@ class MyWidget extends StatelessWidget {
                 //child: ElevatedButton(
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ApiRequestPage()),
-                    );
+                    Get.to(const ApiRequestPage());
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const ApiRequestPage()),
+                    // );
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(250, 65),

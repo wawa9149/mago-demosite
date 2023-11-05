@@ -40,6 +40,7 @@ class ImageResultState extends State<ImageResult> {
     return Center(
       child: Column(
         children: <Widget>[
+
           const SizedBox(
             height: 50,
           ),
