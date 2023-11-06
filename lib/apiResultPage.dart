@@ -5,7 +5,7 @@ import 'package:comet/widget_design/audioPlayer.dart';
 import 'package:comet/widget_design/mutipleAxes.dart';
 import 'package:comet/widget_design/appBar.dart';
 import 'package:comet/widget_design/barChart.dart';
-import 'package:comet/widget_design/sparklineChart.dart';
+import 'package:comet/widget_design/emotionsGraphWidget.dart';
 import 'package:comet/widget_design/textResultBox.dart';
 import 'package:flutter/material.dart';
 import 'package:comet/api/mago_abm.dart';
@@ -39,15 +39,15 @@ class ApiResultPage extends StatelessWidget {
               const SizedBox(
                 height: 100,
               ),
-              GraphResult(
-                result: result,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RadialBarChartSample(),
-                  ColumnRounded(),
+                  RadialBarChartSample(result: result,),
+                  //ColumnRounded(),
                 ],
+              ),
+              GraphResult(
+                result: result,
               ),
               MultipleAxesChart(),
               SizedBox(

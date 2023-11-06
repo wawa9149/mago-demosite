@@ -46,7 +46,7 @@ dependencies:
   get: ^4.6.6 #for state management
   fl_chart: ^0.64.0
   flutter_local_notifications: ^16.1.0 #for notification
-  just_audio: ^0.9.11 #for audio
+  just_audio: ^0.9.35 #for audio
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -93,6 +93,10 @@ flutter:
     - assets/images/Icon_file.png
     - assets/images/background_file.png
     - assets/images/background_main.png
+    - assets/images/angry_rabbit.jpeg
+    - assets/images/happy_rabbit.jpeg
+    - assets/images/sad_rabbit.jpeg
+    - assets/images/neutral_rabbit.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
