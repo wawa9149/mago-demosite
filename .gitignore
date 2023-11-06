@@ -25,3 +25,11 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+
+/flutter
+
+firebase*
+.firebase*
+/firebase.json
+
+.DS_Store

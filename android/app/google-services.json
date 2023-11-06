@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "864149348911",
+    "project_id": "comet-test-34257",
+    "storage_bucket": "comet-test-34257.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864149348911:android:87f76d1c02f46f0fd51cda",
+        "android_client_info": {
+          "package_name": "com.example.comet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABg-dgvXPyWQkURJtlwAP_uC7tIJLKil8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
