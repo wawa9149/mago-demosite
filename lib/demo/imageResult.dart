@@ -23,7 +23,7 @@ const List<Widget> featureName = <Widget>[
 ];
 
 class ImageResultState extends State<ImageResult> {
-  var magoABM = MagoABM('http://saturn.mago52.com:9104/abm'); // API 객체
+  var magoABM = MagoABM('https://abm.magostar.com/abm'); // API 객체
   final List<bool> _selectedFeatures = <bool>[true, false, false, false, false];
   final List<String> features = <String>[
     'Pitch',
@@ -118,10 +118,8 @@ class ImageResultState extends State<ImageResult> {
 
   Future<Uint8List?> _requestImage() async {
     try {
-      print('widget.id: ${widget.id}');
       Uint8List? imageBytes = await magoABM.plotRequest(
           features[_selectedFeatures.indexOf(true)].toString(), widget.id!);
-      //print('imageBytes: $imageBytes');
       return imageBytes;
     } catch (e) {
       print('Error requesting image: $e');

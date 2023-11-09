@@ -89,44 +89,77 @@ class ProgressBarState extends State<ProgressBar> {
 
     return Column(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(15),
-          child: SizedBox(
-            height: 60,
-            width: 500,
-            child: SfLinearGauge(
-              showTicks: false,
-              showLabels: false,
-              animateAxis: true,
-              axisTrackStyle: LinearAxisTrackStyle(
-                thickness: 30,
-                edgeStyle: LinearEdgeStyle.bothCurve,
-                borderWidth: 1,
-                borderColor: Colors.white,
-              ),
-              barPointers: <LinearBarPointer>[
-                LinearBarPointer(
-                  value: progressvalue,
-                  thickness: 30,
-                  edgeStyle: LinearEdgeStyle.bothCurve,
-                  color: Colors.blue,
-                  position: LinearElementPosition.outside, // LinearElementPosition 열거형 사용
-                ),
-              ],
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: Padding(
-            padding: EdgeInsets.all(30),
-            child: Text(
-              progressvalue.toStringAsFixed(2) + '%',
-              style: TextStyle(fontSize: 14, color: Color(0xff000000)),
-            ),
-          ),
-        ),
+        add('말의 속도', '느림', '빠름', 70),
+        add('말의 빈도', '적음', '많음', 50),
+        add('음성의 떨림', '적음', '많음', 30),
+        add('음역대', '낮음', '높음', 80),
       ],
     );
   }
 }
+
+SizedBox add(String feature, String less, String more, double data){
+    return SizedBox(
+      height: 130,
+      width: 800,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(feature, style: TextStyle(fontSize: 20),),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(less, style: TextStyle(fontSize: 20),),
+              Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Center(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: SizedBox(
+                          height: 45,
+                          width: 600,
+                          child: SfLinearGauge(
+                            showTicks: false,
+                            showLabels: false,
+                            animateAxis: true,
+                            axisTrackStyle: LinearAxisTrackStyle(
+                              thickness: 45,
+                              edgeStyle: LinearEdgeStyle.bothCurve,
+                              borderWidth: 1,
+                              borderColor: Colors.grey[350],
+                              color: Colors.grey[350],
+                            ),
+                            barPointers: <LinearBarPointer>[
+                              LinearBarPointer(
+                                  value: data,
+                                  thickness: 45,
+                                  edgeStyle: LinearEdgeStyle.bothCurve,
+                                  color: Color.fromRGBO(49, 81, 63, 1)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(40, 30, 30, 30),
+                      child: Text(
+                        data.toStringAsFixed(1) + '%',
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffFFFFFF)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Text(more, style: TextStyle(fontSize: 20),),
+            ],
+          ),
+        ],
+      ),
+    );
+  }

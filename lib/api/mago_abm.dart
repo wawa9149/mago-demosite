@@ -116,7 +116,6 @@ class MagoABM {
     });
 
     if (response.statusCode == 200) {
-      print('response.bodyBytes: ${response.bodyBytes}');
       return response.bodyBytes; // 이미지 바이트 데이터를 직접 사용
     } else {
       print('Plot failed with status: ${response.statusCode}');

@@ -32,7 +32,6 @@ class MagoS2T {
   }
 
   Future<String?> upload(Uint8List audioData, String fileName) async {
-    //print('audioData: $audioData, fileName: $fileName');
     try {
       print('uploading...');
       var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/upload'))
@@ -74,11 +73,8 @@ class MagoS2T {
             });
 
         if (response.statusCode == 200) {
-          // var utf16CodeUnits = response.bodyBytes.buffer.asUint16List();
-          // var responseBody = String.fromCharCodes(utf16CodeUnits);
           var responseBody = utf8.decode(response.bodyBytes);
           var result = getResultFromJson(responseBody, 'result');
-          //String result = jsonEncode(response.bodyBytes);
           if (result != null) {
             timer.cancel();
             completer.complete(result);
@@ -107,16 +103,11 @@ class MagoS2T {
       if (contentsObject.containsKey('results') == false) {
         return null;
       }
-      String result = json.encode(contentsObject['results']);
-      print('S2T Result: $result');
-      return result;
-      //Map<String, dynamic> resultsObject = contentsObject['results'];
-      // if (resultsObject.containsKey('text') == false) {
-      //   return null;
-      // }
-      // String text = resultsObject['text'];
-      // print('S2T Result: $text');
-      //return text;
+      Map<String, dynamic> result = contentsObject['results'];
+      String text = json.encode(result['text']);
+
+      print('S2T Result: $text');
+      return text;
     }
     return null;
   }

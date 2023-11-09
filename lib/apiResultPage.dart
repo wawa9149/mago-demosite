@@ -53,11 +53,13 @@ class ApiResultPage extends StatelessWidget {
               SoundQualityGraph(
                 result: result,
               ),
-              //MultipleAxesChart(),
+              SizedBox(
+                height: 50,
+              ),
+              ProgressBar(result: result),
               SizedBox(
                 height: 100,
               ),
-              ProgressBar(result: result),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
