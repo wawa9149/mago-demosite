@@ -1,15 +1,16 @@
-import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:comet/widget_design/audioPlayer.dart';
+import 'package:comet/widget_design/barChart.dart';
 import 'package:comet/widget_design/mutipleAxes.dart';
 import 'package:comet/widget_design/appBar.dart';
-import 'package:comet/widget_design/barChart.dart';
 import 'package:comet/widget_design/emotionsGraphWidget.dart';
+import 'package:comet/widget_design/soundQualityGraphWidget.dart';
 import 'package:comet/widget_design/textResultBox.dart';
 import 'package:flutter/material.dart';
-import 'package:comet/api/mago_abm.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import 'apiRequestPage.dart';
 import 'demo/graphWidget.dart';
 import 'demo/imageResult.dart';
 
@@ -46,13 +47,17 @@ class ApiResultPage extends StatelessWidget {
                   //ColumnRounded(),
                 ],
               ),
-              GraphResult(
+              SizedBox(
+                height: 50,
+              ),
+              SoundQualityGraph(
                 result: result,
               ),
-              MultipleAxesChart(),
+              //MultipleAxesChart(),
               SizedBox(
                 height: 100,
               ),
+              ProgressBar(result: result),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -78,9 +83,46 @@ class ApiResultPage extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              //ImageResult(id: result[3]),
+              ImageResult(id: result[3]),
               const SizedBox(
                 height: 50,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Go Back'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.to(const ApiRequestPage());
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const ApiRequestPage()),
+                  // );
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(250, 65),
+                  textStyle:
+                  const TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+                  foregroundColor: Color.fromRGBO(49, 81, 63, 1),
+                  backgroundColor: Colors.white,
+                  // 버튼 텍스트의 색상을 흰색으로 설정
+                  shadowColor: Colors.black,
+                  elevation: 10,
+                  // 그림자의 깊이를 나타냄
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  'Get Started', // 표시할 텍스트
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontFamily: 'NEXONLv1GothicBold',
+                      color: Color.fromRGBO(49, 81, 63, 1)), // 텍스트 스타일 조절
+                ),
               ),
             ],
           ),

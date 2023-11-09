@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 Container TextResultBox(String? result) {
   return Container(
-    height: 300,
-    width: 800,
+    height: 200,
+    width: 750,
     padding: EdgeInsets.all(16.0),
     decoration: BoxDecoration(
       color: Colors.white, // 배경색

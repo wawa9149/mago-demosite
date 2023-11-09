@@ -6,7 +6,7 @@ import 'package:http_parser/http_parser.dart';
 
 class MagoEMO {
   String apiUrl;
-  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69';
+  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69'; // 토큰 값 따로 빼기
   String? id;
 
   MagoEMO(this.apiUrl);
@@ -62,7 +62,7 @@ class MagoEMO {
   Future<String> getResult(String id) async {
     Completer<String> completer = Completer<String>();
     // Results are not immediately available, so we poll the API until we get a result
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
+    Timer.periodic(const Duration(milliseconds: 500), (timer) async {
       try {
         var response =
         await http.get(Uri.parse('$apiUrl/result/$id'), headers: {
