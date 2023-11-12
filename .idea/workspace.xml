@@ -10,26 +10,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd728dd2-0fd6-44e3-9223-7836b3131a2b" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/detailPage.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widget_design/soundQualityGraphWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/animalResult.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widget_design/emotionImage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/comet.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/api/getApiResult.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api/getApiResult.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/api/mago_abm.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api/mago_abm.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/api/mago_emo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api/mago_emo.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/api/mago_s2t.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api/mago_s2t.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/apiRequestPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/apiRequestPage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/apiResultPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/apiResultPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/demo/dnd.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/demo/dragndrop.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/demo/graphWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/demo/graphWidget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/detailPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/detailPage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widget_design/appBar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget_design/appBar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widget_design/barChart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget_design/barChart.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widget_design/barChart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget_design/progressBarWidget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widget_design/emotionsGraphWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget_design/emotionsGraphWidget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widget_design/soundQualityGraphWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget_design/soundQualityGraphWidget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widget_design/textResultBox.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widget_design/textResultBox.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/ephemeral/.plugin_symlinks/url_launcher_linux" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/ephemeral/.plugin_symlinks/url_launcher_linux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/url_launcher_windows" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/ephemeral/.plugin_symlinks/url_launcher_windows" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,6 +224,9 @@
       <workItem from="1697274837654" duration="72036000" />
       <workItem from="1699335661655" duration="7097000" />
       <workItem from="1699354859024" duration="11146000" />
+      <workItem from="1699428906159" duration="30911000" />
+      <workItem from="1699751516311" duration="10591000" />
+      <workItem from="1699783150487" duration="21156000" />
     </task>
     <servers />
   </component>

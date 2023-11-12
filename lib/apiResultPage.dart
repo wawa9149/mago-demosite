@@ -1,23 +1,21 @@
 import 'dart:typed_data';
 
-import 'package:comet/widget_design/barChart.dart';
-import 'package:comet/widget_design/mutipleAxes.dart';
-import 'package:comet/widget_design/appBar.dart';
+import 'package:comet/detailPage.dart';
 import 'package:comet/widget_design/emotionsGraphWidget.dart';
+import 'package:comet/widget_design/progressBarWidget.dart';
+import 'package:comet/widget_design/appBar.dart';
 import 'package:comet/widget_design/soundQualityGraphWidget.dart';
-import 'package:comet/widget_design/textResultBox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import 'apiRequestPage.dart';
-import 'demo/graphWidget.dart';
-import 'demo/imageResult.dart';
+import 'animalResult.dart';
 
 class ApiResultPage extends StatelessWidget {
-  ApiResultPage({required this.result, required this.audioSource, Key? key}) : super(key: key);
+  ApiResultPage({required this.result, required this.audioSource, required this.gender, Key? key}) : super(key: key);
 
   List<String?> result = [];
+  String gender = '';
   Uint8List audioSource = Uint8List(0);
 
   @override
@@ -31,102 +29,60 @@ class ApiResultPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBarMenu(textButtonStyle),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-            //AudioPlayerWidget(audioSource: audioSource,),
-              const SizedBox(
-                height: 100,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RadialBarChartSample(result: result,),
-                  //ColumnRounded(),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              SoundQualityGraph(
-                result: result,
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              ProgressBar(result: result),
-              SizedBox(
-                height: 100,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('<음성 인식 결과>',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 20),
-                  TextResultBox(result[0] ?? 'N/A'),
-                  SizedBox(height: 50),
-                  Text('<Acoustic BioMarker 결과>',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 20),
-                  TextResultBox(result[1] ?? 'N/A'),
-                  SizedBox(height: 50),
-                  Text('<감정 인식 결과>',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 20),
-                  TextResultBox(result[2] ?? 'N/A'),
-                ],
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              ImageResult(id: result[3]),
-              const SizedBox(
-                height: 50,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Go Back'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Get.to(const ApiRequestPage());
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const ApiRequestPage()),
-                  // );
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(250, 65),
-                  textStyle:
-                  const TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
-                  foregroundColor: Color.fromRGBO(49, 81, 63, 1),
-                  backgroundColor: Colors.white,
-                  // 버튼 텍스트의 색상을 흰색으로 설정
-                  shadowColor: Colors.black,
-                  elevation: 10,
-                  // 그림자의 깊이를 나타냄
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.bottomCenter,
+            image: AssetImage('assets/images/background_file.png'), // 배경 이미지
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              //AudioPlayerWidget(audioSource: audioSource,),
+                AnimalResult(result: result, gender: gender),
+                const SizedBox(
+                  height: 50,
+                ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     Navigator.pop(context);
+                //   },
+                //   child: Text('Go Back'),
+                // ),
+                // detailPage로 이동
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(DetailPage(result: result));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(200, 65),
+                    foregroundColor: Color.fromRGBO(49, 81, 63, 1),
+                    backgroundColor: Colors.white,
+                    // 버튼 텍스트의 색상을 흰색으로 설정
+                    shadowColor: Colors.black,
+                    elevation: 10,
+                    // 그림자의 깊이를 나타냄
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text(
+                    '상세 결과 확인', // 표시할 텍스트
+                    style: TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold,
+                        fontFamily: 'NEXONLv1GothicBold',
+                        color: Color.fromRGBO(49, 81, 63, 1)), // 텍스트 스타일 조절
                   ),
                 ),
-                child: const Text(
-                  'Get Started', // 표시할 텍스트
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontFamily: 'NEXONLv1GothicBold',
-                      color: Color.fromRGBO(49, 81, 63, 1)), // 텍스트 스타일 조절
+                SizedBox(
+                  height: 100,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

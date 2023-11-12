@@ -5,19 +5,19 @@ AppBar AppBarMenu(ButtonStyle textButtonStyle) {
   void _customBackButtonAction() {
     // 뒤로가기 버튼을 눌렀을 때 수행할 커스텀 동작 추가
     print('Custom back button pressed');
-    // 여기에 원하는 동작 추가
+
   }
 
   return AppBar(
     toolbarHeight: 80,
     backgroundColor: Color.fromRGBO(49, 81, 63, 1),
-    leading: IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        // 뒤로가기 버튼을 누를 때 커스텀 동작 수행
-        _customBackButtonAction();
-      },
-    ),
+    // leading: IconButton(
+    //   icon: Icon(Icons.arrow_back),
+    //   onPressed: () {
+    //     // 뒤로가기 버튼을 누를 때 커스텀 동작 수행
+    //     _customBackButtonAction();
+    //   },
+    // ),
     actions: <Widget>[
       Padding(
         padding: EdgeInsets.fromLTRB(60, 0, 0, 0),

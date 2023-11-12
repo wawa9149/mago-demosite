@@ -27,8 +27,6 @@ class _GraphResultState extends State<GraphResult> {
       // status에 따라서 다른 결과를 반환
       if (status == 'rms') {
         Map<String, dynamic> contentsObject = jsonObject['energy'];
-        print(contentsObject);
-        print('ABM energy: ok');
         double scaledRMS = (contentsObject['rms']);
 
         // 소수점 1자리까지 나타내는 문자열로 변환
@@ -37,12 +35,9 @@ class _GraphResultState extends State<GraphResult> {
         // 다시 double로 파싱
         double rms = double.parse(scaledRMSString);
 
-        print('Scaled RMS 값 (1자리까지): $rms');
         return rms;
       } else if (status == 'snr') {
         Map<String, dynamic> contentsObject = jsonObject['energy'];
-        print(contentsObject);
-        print('ABM energy: ok');
         double scaledSNR = (contentsObject['snr']);
 
         // 소수점 1자리까지 나타내는 문자열로 변환
@@ -51,12 +46,10 @@ class _GraphResultState extends State<GraphResult> {
         // 다시 double로 파싱
         double snr = double.parse(scaledSNRString);
 
-        print('Scaled RMS 값 (1자리까지): $snr');
         return snr;
       } else if (status == 'shimmer') {
         Map<String, dynamic> contentsObject = jsonObject['energy'];
-        print(contentsObject);
-        print('ABM energy: ok');
+
         double scaledSNR = (contentsObject['snr'] * 100);
 
         // 소수점 1자리까지 나타내는 문자열로 변환
@@ -65,7 +58,6 @@ class _GraphResultState extends State<GraphResult> {
         // 다시 double로 파싱
         double snr = double.parse(scaledSNRString);
 
-        print('Scaled RMS 값 (1자리까지): $snr');
         return snr;
       }
       return null;

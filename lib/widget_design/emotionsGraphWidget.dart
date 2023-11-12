@@ -1,21 +1,27 @@
 import 'dart:convert';
 
+import 'package:comet/widget_design/progressBarWidget.dart';
+import 'package:comet/widget_design/soundQualityGraphWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class RadialBarChartSample extends StatefulWidget {
+class EmotionsGraph extends StatefulWidget {
   List<String?> result = [];
+  String animal = '';
+  List<double> abmResult = [];
 
-  RadialBarChartSample({required this.result, Key? key}) : super(key: key);
+  EmotionsGraph({required this.result, required this.abmResult, required this.animal, Key? key})
+      : super(key: key);
 
   @override
-  RadialBarChartSampleState createState() => RadialBarChartSampleState();
+  EmotionsGraphState createState() => EmotionsGraphState();
 }
 
-class RadialBarChartSampleState extends State<RadialBarChartSample> {
+class EmotionsGraphState extends State<EmotionsGraph> {
   late TooltipBehavior _tooltipBehavior;
   late List<ChartSampleData> _data;
   late String? jsonData = widget.result[2];
+  List<AnimalType> animalList = [];
 
   double? getResultFromJson(String status) {
     // JSON 문자열을 파싱하여 List<Map<String, dynamic>> 형태로 변환
@@ -47,20 +53,215 @@ class RadialBarChartSampleState extends State<RadialBarChartSample> {
     }
   }
 
-  String selectImage() {
+  String? animalType(String animal) {
     List<dynamic> jsonObject = json.decode(jsonData!);
     String text = jsonObject[0]['text'];
 
     if (text == 'NEUTRAL') {
-      return 'assets/images/neutral_rabbit.jpeg';
+      if (animal == '달팽이') {
+        animalList.add(AnimalType(
+            animal: '평온한 $animal',
+            image: 'assets/images/neutral_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '소') {
+        animalList.add(AnimalType(
+            animal: '평온한 $animal',
+            image: 'assets/images/neutral_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '백조') {
+        animalList.add(AnimalType(
+            animal: '평온한 $animal',
+            image: 'assets/images/neutral_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '양') {
+        animalList.add(AnimalType(
+            animal: '평온한 $animal',
+            image: 'assets/images/neutral_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '사자') {
+        animalList.add(AnimalType(
+            animal: '평온한 $animal',
+            image: 'assets/images/neutral_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '두더지') {
+        animalList.add(AnimalType(
+            animal: '평온한 $animal',
+            image: 'assets/images/neutral_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '햄스터') {
+        animalList.add(AnimalType(
+            animal: '평온한 $animal',
+            image: 'assets/images/neutral_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '참새') {
+        animalList.add(AnimalType(
+            animal: '평온한 $animal',
+            image: 'assets/images/neutral_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      }
+      return '평온한';
     } else if (text == 'ANGRY') {
-      return 'assets/images/angry_rabbit.jpeg';
+      if (animal == '달팽이') {
+        animalList.add(AnimalType(
+            animal: '뿔난 $animal',
+            image: 'assets/images/angry_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '소') {
+        animalList.add(AnimalType(
+            animal: '뿔난 $animal',
+            image: 'assets/images/angry_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '백조') {
+        animalList.add(AnimalType(
+            animal: '뿔난 $animal',
+            image: 'assets/images/angry_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '양') {
+        animalList.add(AnimalType(
+            animal: '뿔난 $animal',
+            image: 'assets/images/angry_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '사자') {
+        animalList.add(AnimalType(
+            animal: '뿔난 $animal',
+            image: 'assets/images/angry_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '두더지') {
+        animalList.add(AnimalType(
+            animal: '뿔난 $animal',
+            image: 'assets/images/angry_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '햄스터') {
+        animalList.add(AnimalType(
+            animal: '뿔난 $animal',
+            image: 'assets/images/angry_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '참새') {
+        animalList.add(AnimalType(
+            animal: '뿔난 $animal',
+            image: 'assets/images/angry_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      }
+      return '뿔난';
     } else if (text == 'SADNESS') {
-      return 'assets/images/sad_rabbit.jpeg';
+      if (animal == '달팽이') {
+        animalList.add(AnimalType(
+            animal: '슬픈 $animal',
+            image: 'assets/images/sad_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '소') {
+        animalList.add(AnimalType(
+            animal: '슬픈 $animal',
+            image: 'assets/images/sad_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '백조') {
+        animalList.add(AnimalType(
+            animal: '슬픈 $animal',
+            image: 'assets/images/sad_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '양') {
+        animalList.add(AnimalType(
+            animal: '슬픈 $animal',
+            image: 'assets/images/sad_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '사자') {
+        animalList.add(AnimalType(
+            animal: '슬픈 $animal',
+            image: 'assets/images/sad_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '두더지') {
+        animalList.add(AnimalType(
+            animal: '슬픈 $animal',
+            image: 'assets/images/sad_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '햄스터') {
+        animalList.add(AnimalType(
+            animal: '슬픈 $animal',
+            image: 'assets/images/sad_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '참새') {
+        animalList.add(AnimalType(
+            animal: '슬픈 $animal',
+            image: 'assets/images/sad_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      }
+      return '슬픈';
     } else if (text == 'HAPPINESS') {
-      return 'assets/images/happy_rabbit.jpeg';
+      if (animal == '달팽이') {
+        animalList.add(AnimalType(
+            animal: '행복한 $animal',
+            image: 'assets/images/happy_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '소') {
+        animalList.add(AnimalType(
+            animal: '행복한 $animal',
+            image: 'assets/images/happy_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '백조') {
+        animalList.add(AnimalType(
+            animal: '행복한 $animal',
+            image: 'assets/images/happy_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '양') {
+        animalList.add(AnimalType(
+            animal: '행복한 $animal',
+            image: 'assets/images/happy_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '사자') {
+        animalList.add(AnimalType(
+            animal: '행복한 $animal',
+            image: 'assets/images/happy_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '두더지') {
+        animalList.add(AnimalType(
+            animal: '행복한 $animal',
+            image: 'assets/images/happy_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '햄스터') {
+        animalList.add(AnimalType(
+            animal: '행복한 $animal',
+            image: 'assets/images/happy_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      } else if (animal == '참새') {
+        animalList.add(AnimalType(
+            animal: '행복한 $animal',
+            image: 'assets/images/happy_rabbit.jpeg',
+            resultText: '결과 텍스트'));
+      }
+      return '행복한';
+    }
+  }
+
+  String? selectData(String data, String status) {
+    // 원하는 객체를 찾아서 image 속성 가져오기
+    String? value;
+    AnimalType? desiredAnimal;
+
+    print(data);
+    if(status == 'image') {
+      for (AnimalType animal in animalList) {
+        if (animal.animal == data) {
+          desiredAnimal = animal;
+          value = animal.image;
+          return value;
+        }
+      }
+    }
+    else if(status == 'resultText'){
+      for (AnimalType animal in animalList) {
+        if (animal.animal == data) {
+          desiredAnimal = animal;
+          value = animal.resultText;
+          return value;
+        }
+      }
+    }
+
+// 원하는 객체가 있다면 image 속성 출력
+    if (desiredAnimal != null) {
+      status == 'image' ? print('이미지: $value') : print('결과 텍스트: $value');
     } else {
-      return 'assets/images/neutral_rabbit.jpeg';
+      print('원하는 동물을 찾지 못했습니다.');
     }
   }
 
@@ -70,22 +271,22 @@ class RadialBarChartSampleState extends State<RadialBarChartSample> {
         TooltipBehavior(enable: true, format: 'point.x : point.y%');
     _data = <ChartSampleData>[
       ChartSampleData(
-          x: 'Neutral',
+          x: '중립',
           y: getResultFromJson('NEUTRAL')!,
           text: '100%',
           pointColor: const Color.fromRGBO(248, 177, 149, 1.0)),
       ChartSampleData(
-          x: 'Angry',
+          x: '화남',
           y: getResultFromJson('ANGRY')!,
           text: '100%',
           pointColor: const Color.fromRGBO(246, 114, 128, 1.0)),
       ChartSampleData(
-          x: 'Sadness',
+          x: '슬픔',
           y: getResultFromJson('SADNESS')!,
           text: '100%',
           pointColor: const Color.fromRGBO(61, 205, 171, 1.0)),
       ChartSampleData(
-          x: 'Happiness',
+          x: '행복',
           y: getResultFromJson('HAPPINESS')!,
           text: '100%',
           pointColor: const Color.fromRGBO(1, 174, 190, 1.0)),
@@ -96,8 +297,12 @@ class RadialBarChartSampleState extends State<RadialBarChartSample> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 100),
         Text('당신의 음성 유형은?',
-            style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold)),
+        SizedBox(height: 20),
+        Text('"'+ animalType(widget.animal)! + " " + widget.animal! + '" 입니다!' ,
+            style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold)),
         SizedBox(height: 50),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +310,7 @@ class RadialBarChartSampleState extends State<RadialBarChartSample> {
             Container(
               height: 300,
               child: Image.asset(
-                selectImage(),
+                selectData(animalType(widget.animal)! + " " + widget.animal, 'image')!,
               ),
             ),
             SizedBox(
@@ -115,12 +320,48 @@ class RadialBarChartSampleState extends State<RadialBarChartSample> {
               width: 400,
               height: 400,
               child: SfCircularChart(
-                title: ChartTitle(text: 'Emotions'),
+                title: ChartTitle(text: '감정 결과', textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 series: _getRadialBarDefaultSeries(),
                 tooltipBehavior: _tooltipBehavior,
               ),
             ),
           ],
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        SoundQualityGraph(
+          result: widget.result,
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        ProgressBar(result: widget.abmResult),
+        SizedBox(
+          height: 50,
+        ),
+        Container(
+          height: 250,
+          width: 800,
+          padding: EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: Colors.white, // 배경색
+            borderRadius: BorderRadius.circular(20), // 테두리의 모서리를 둥글게 만듦
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.grey, // 그림자의 색상
+                offset: Offset(0, 5), // 그림자의 위치 (가로, 세로)
+                blurRadius: 10, // 그림자의 흐림 정도
+                spreadRadius: 2, // 그림자의 확산 정도
+              ),
+            ],
+          ),
+          child: SingleChildScrollView(
+            // 스크롤 가능
+            child: Center(
+              child: Text(selectData(animalType(widget.animal)! + " " + widget.animal, 'resultText')!, style: TextStyle(fontSize: 20,)), // 결과 출력
+            ),
+          ),
         ),
       ],
     );
@@ -159,4 +400,13 @@ class ChartSampleData {
   final double y;
   final String text;
   final Color pointColor;
+}
+
+class AnimalType {
+  AnimalType(
+      {required this.animal, required this.image, required this.resultText});
+
+  String animal;
+  String image;
+  String resultText;
 }

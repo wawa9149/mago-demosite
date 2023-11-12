@@ -10,6 +10,7 @@ class MagoS2T {
   String resultType = 'text';
   String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69'; // 토큰 값 따로 빼기
   String? id;
+
   MagoS2T(this.apiUrl);
 
   // 음성 인식 요청
@@ -64,26 +65,33 @@ class MagoS2T {
     Completer<String> completer = Completer<String>();
 
     Timer.periodic(const Duration(milliseconds: 500), (timer) async {
-      try {
-        var response = await http.get(
+      if (timer.tick * 500 >= 30000) {
+        // 30초 이상 경과하면 타이머를 취소하고 오류를 반환합니다.
+        timer.cancel();
+        completer.completeError(TimeoutException('Request timed out'));
+      } else {
+        try {
+          var response = await http.get(
             Uri.parse('$apiUrl/result/$id?result_type=$resultType'),
             headers: {
               'accept': 'application/json',
               'Bearer': key,
-            });
+            },
+          );
 
-        if (response.statusCode == 200) {
-          var responseBody = utf8.decode(response.bodyBytes);
-          var result = getResultFromJson(responseBody, 'result');
-          if (result != null) {
-            timer.cancel();
-            completer.complete(result);
-          } else {
-            print('No result yet');
+          if (response.statusCode == 200) {
+            var responseBody = utf8.decode(response.bodyBytes);
+            var result = getResultFromJson(responseBody, 'result');
+            if (result != null) {
+              timer.cancel();
+              completer.complete(result);
+            } else {
+              print('No result yet');
+            }
           }
+        } catch (e) {
+          completer.completeError(e);
         }
-      } catch (e) {
-        completer.completeError(e);
       }
     });
 
