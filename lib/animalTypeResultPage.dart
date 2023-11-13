@@ -5,17 +5,17 @@ import 'package:comet/widget_design/progressBarWidget.dart';
 import 'package:comet/widget_design/soundQualityGraphWidget.dart';
 import 'package:flutter/material.dart';
 
-class AnimalResult extends StatefulWidget {
+class AnimalTypeResult extends StatefulWidget {
   List<String?> result = [];
   String gender = '';
 
-  AnimalResult({required this.result, required this.gender, Key? key}) : super(key: key);
+  AnimalTypeResult({required this.result, required this.gender, Key? key}) : super(key: key);
 
   @override
-  State<AnimalResult> createState() => _AnimalResultState();
+  State<AnimalTypeResult> createState() => AnimalTypeResultState();
 }
 
-class _AnimalResultState extends State<AnimalResult> {
+class AnimalTypeResultState extends State<AnimalTypeResult> {
   late String? s2tjsonData = widget.result[0];
   late String? abmjsonData = widget.result[1];
   late List<double> abmResult;
@@ -23,6 +23,7 @@ class _AnimalResultState extends State<AnimalResult> {
   @override
   void initState() {
     super.initState();
+    // abmResult에 결과 저장
     abmResult = getResultFromJson();
   }
 
@@ -63,64 +64,42 @@ class _AnimalResultState extends State<AnimalResult> {
 
 String AnimalTestResult(List<double> abmResult, String gender) {
   double speed = abmResult[0];
-  double frequency = abmResult[1];
+  double pitch = abmResult[1];
   double shimmer = abmResult[2];
-  double pitch = abmResult[3];
+
+  const double malePitchThreshold = 125;
+  const double femalePitchThreshold = 205;
+  const double speedThreshold = 50;
+  const double shimmerThreshold = 50;
+
   String animal = '';
 
-  print('speed: $speed');
+  // Determine pitch threshold based on gender
+  double pitchThreshold = (gender == '남') ? malePitchThreshold : femalePitchThreshold;
 
-  if(gender == '남'){
-    if(speed < 50 && pitch < 125 && shimmer < 50){
+  // Determine animal based on criteria
+  if (speed < speedThreshold) {
+    if (pitch < pitchThreshold && shimmer < shimmerThreshold) {
       animal = '달팽이';
-    }
-    else if(speed < 50 && pitch < 125 && shimmer > 50){
+    } else if (pitch < pitchThreshold && shimmer > shimmerThreshold) {
       animal = '소';
-    }
-    else if(speed < 50 && pitch > 125 && shimmer < 50){
+    } else if (pitch > pitchThreshold && shimmer < shimmerThreshold) {
       animal = '백조';
-    }
-    else if(speed < 50 && pitch > 125 && shimmer > 50){
+    } else if (pitch > pitchThreshold && shimmer > shimmerThreshold) {
       animal = '양';
     }
-    else if(speed > 50 && pitch < 125 && shimmer < 50){
+  } else {
+    if (pitch < pitchThreshold && shimmer < shimmerThreshold) {
       animal = '사자';
-    }
-    else if(speed > 50 && pitch > 125 && shimmer < 50){
+    } else if (pitch > pitchThreshold && shimmer < shimmerThreshold) {
       animal = '두더지';
-    }
-    else if(speed > 50 && pitch < 125 && shimmer > 50){
+    } else if (pitch < pitchThreshold && shimmer > shimmerThreshold) {
       animal = '햄스터';
-    }
-    else if(speed > 50 && pitch > 125 && shimmer > 50){
-      animal = '참새';
-    }
-  } else if(gender == '여'){
-    if(speed < 50 && pitch < 205 && shimmer < 50){
-      animal = '달팽이';
-    }
-    else if(speed < 50 && pitch < 205 && shimmer > 50){
-      animal = '소';
-    }
-    else if(speed < 50 && pitch > 205 && shimmer < 50){
-      animal = '백조';
-    }
-    else if(speed < 50 && pitch > 205 && shimmer > 50){
-      animal = '양';
-    }
-    else if(speed > 50 && pitch < 205 && shimmer < 50){
-      animal = '사자';
-    }
-    else if(speed > 50 && pitch > 205 && shimmer < 50){
-      animal = '두더지';
-    }
-    else if(speed > 50 && pitch < 205 && shimmer > 50){
-      animal = '햄스터';
-    }
-    else if(speed > 50 && pitch > 205 && shimmer > 50){
+    } else if (pitch > pitchThreshold && shimmer > shimmerThreshold) {
       animal = '참새';
     }
   }
+
   return animal;
 }
 

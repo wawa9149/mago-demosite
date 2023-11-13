@@ -10,7 +10,11 @@ class EmotionsGraph extends StatefulWidget {
   String animal = '';
   List<double> abmResult = [];
 
-  EmotionsGraph({required this.result, required this.abmResult, required this.animal, Key? key})
+  EmotionsGraph(
+      {required this.result,
+      required this.abmResult,
+      required this.animal,
+      Key? key})
       : super(key: key);
 
   @override
@@ -57,179 +61,44 @@ class EmotionsGraphState extends State<EmotionsGraph> {
     List<dynamic> jsonObject = json.decode(jsonData!);
     String text = jsonObject[0]['text'];
 
-    if (text == 'NEUTRAL') {
-      if (animal == '달팽이') {
-        animalList.add(AnimalType(
-            animal: '평온한 $animal',
-            image: 'assets/images/neutral_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '소') {
-        animalList.add(AnimalType(
-            animal: '평온한 $animal',
-            image: 'assets/images/neutral_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '백조') {
-        animalList.add(AnimalType(
-            animal: '평온한 $animal',
-            image: 'assets/images/neutral_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '양') {
-        animalList.add(AnimalType(
-            animal: '평온한 $animal',
-            image: 'assets/images/neutral_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '사자') {
-        animalList.add(AnimalType(
-            animal: '평온한 $animal',
-            image: 'assets/images/neutral_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '두더지') {
-        animalList.add(AnimalType(
-            animal: '평온한 $animal',
-            image: 'assets/images/neutral_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '햄스터') {
-        animalList.add(AnimalType(
-            animal: '평온한 $animal',
-            image: 'assets/images/neutral_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '참새') {
-        animalList.add(AnimalType(
-            animal: '평온한 $animal',
-            image: 'assets/images/neutral_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      }
-      return '평온한';
-    } else if (text == 'ANGRY') {
-      if (animal == '달팽이') {
-        animalList.add(AnimalType(
-            animal: '뿔난 $animal',
-            image: 'assets/images/angry_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '소') {
-        animalList.add(AnimalType(
-            animal: '뿔난 $animal',
-            image: 'assets/images/angry_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '백조') {
-        animalList.add(AnimalType(
-            animal: '뿔난 $animal',
-            image: 'assets/images/angry_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '양') {
-        animalList.add(AnimalType(
-            animal: '뿔난 $animal',
-            image: 'assets/images/angry_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '사자') {
-        animalList.add(AnimalType(
-            animal: '뿔난 $animal',
-            image: 'assets/images/angry_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '두더지') {
-        animalList.add(AnimalType(
-            animal: '뿔난 $animal',
-            image: 'assets/images/angry_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '햄스터') {
-        animalList.add(AnimalType(
-            animal: '뿔난 $animal',
-            image: 'assets/images/angry_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '참새') {
-        animalList.add(AnimalType(
-            animal: '뿔난 $animal',
-            image: 'assets/images/angry_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      }
-      return '뿔난';
-    } else if (text == 'SADNESS') {
-      if (animal == '달팽이') {
-        animalList.add(AnimalType(
-            animal: '슬픈 $animal',
-            image: 'assets/images/sad_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '소') {
-        animalList.add(AnimalType(
-            animal: '슬픈 $animal',
-            image: 'assets/images/sad_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '백조') {
-        animalList.add(AnimalType(
-            animal: '슬픈 $animal',
-            image: 'assets/images/sad_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '양') {
-        animalList.add(AnimalType(
-            animal: '슬픈 $animal',
-            image: 'assets/images/sad_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '사자') {
-        animalList.add(AnimalType(
-            animal: '슬픈 $animal',
-            image: 'assets/images/sad_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '두더지') {
-        animalList.add(AnimalType(
-            animal: '슬픈 $animal',
-            image: 'assets/images/sad_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '햄스터') {
-        animalList.add(AnimalType(
-            animal: '슬픈 $animal',
-            image: 'assets/images/sad_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '참새') {
-        animalList.add(AnimalType(
-            animal: '슬픈 $animal',
-            image: 'assets/images/sad_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      }
-      return '슬픈';
-    } else if (text == 'HAPPINESS') {
-      if (animal == '달팽이') {
-        animalList.add(AnimalType(
-            animal: '행복한 $animal',
-            image: 'assets/images/happy_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '소') {
-        animalList.add(AnimalType(
-            animal: '행복한 $animal',
-            image: 'assets/images/happy_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '백조') {
-        animalList.add(AnimalType(
-            animal: '행복한 $animal',
-            image: 'assets/images/happy_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '양') {
-        animalList.add(AnimalType(
-            animal: '행복한 $animal',
-            image: 'assets/images/happy_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '사자') {
-        animalList.add(AnimalType(
-            animal: '행복한 $animal',
-            image: 'assets/images/happy_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '두더지') {
-        animalList.add(AnimalType(
-            animal: '행복한 $animal',
-            image: 'assets/images/happy_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '햄스터') {
-        animalList.add(AnimalType(
-            animal: '행복한 $animal',
-            image: 'assets/images/happy_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      } else if (animal == '참새') {
-        animalList.add(AnimalType(
-            animal: '행복한 $animal',
-            image: 'assets/images/happy_rabbit.jpeg',
-            resultText: '결과 텍스트'));
-      }
-      return '행복한';
+    String emotionPrefix = '';
+    String emotionImage = '';
+    String emotionResultText = '';
+
+    switch (text) {
+      case 'NEUTRAL':
+        emotionPrefix = '평온한';
+        emotionImage = 'assets/images/neutral_rabbit.jpeg';
+        emotionResultText = '결과 텍스트';
+        break;
+      case 'ANGRY':
+        emotionPrefix = '뿔난';
+        emotionImage = 'assets/images/angry_rabbit.jpeg';
+        emotionResultText = '결과 텍스트';
+        break;
+      case 'SADNESS':
+        emotionPrefix = '슬픈';
+        emotionImage = 'assets/images/sad_rabbit.jpeg';
+        emotionResultText = '결과 텍스트';
+        break;
+      case 'HAPPINESS':
+        emotionPrefix = '행복한';
+        emotionImage = 'assets/images/happy_rabbit.jpeg';
+        emotionResultText = '결과 텍스트';
+        break;
+      default:
+        return null; // 처리하지 않은 감정인 경우 null 반환 또는 예외 처리 추가
     }
+
+    if (animal.isNotEmpty) {
+      animalList.add(AnimalType(
+        animal: '$emotionPrefix $animal',
+        image: emotionImage,
+        resultText: emotionResultText,
+      ));
+    }
+
+    return emotionPrefix;
   }
 
   String? selectData(String data, String status) {
@@ -238,7 +107,7 @@ class EmotionsGraphState extends State<EmotionsGraph> {
     AnimalType? desiredAnimal;
 
     print(data);
-    if(status == 'image') {
+    if (status == 'image') {
       for (AnimalType animal in animalList) {
         if (animal.animal == data) {
           desiredAnimal = animal;
@@ -246,8 +115,7 @@ class EmotionsGraphState extends State<EmotionsGraph> {
           return value;
         }
       }
-    }
-    else if(status == 'resultText'){
+    } else if (status == 'resultText') {
       for (AnimalType animal in animalList) {
         if (animal.animal == data) {
           desiredAnimal = animal;
@@ -301,7 +169,7 @@ class EmotionsGraphState extends State<EmotionsGraph> {
         Text('당신의 음성 유형은?',
             style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold)),
         SizedBox(height: 20),
-        Text('"'+ animalType(widget.animal)! + " " + widget.animal! + '" 입니다!' ,
+        Text('"' + animalType(widget.animal)! + " " + widget.animal! + '" 입니다!',
             style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold)),
         SizedBox(height: 50),
         Row(
@@ -310,7 +178,8 @@ class EmotionsGraphState extends State<EmotionsGraph> {
             Container(
               height: 300,
               child: Image.asset(
-                selectData(animalType(widget.animal)! + " " + widget.animal, 'image')!,
+                selectData(
+                    animalType(widget.animal)! + " " + widget.animal, 'image')!,
               ),
             ),
             SizedBox(
@@ -320,7 +189,10 @@ class EmotionsGraphState extends State<EmotionsGraph> {
               width: 400,
               height: 400,
               child: SfCircularChart(
-                title: ChartTitle(text: '감정 결과', textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                title: ChartTitle(
+                    text: '감정 결과',
+                    textStyle:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 series: _getRadialBarDefaultSeries(),
                 tooltipBehavior: _tooltipBehavior,
               ),
@@ -333,11 +205,11 @@ class EmotionsGraphState extends State<EmotionsGraph> {
         SoundQualityGraph(
           result: widget.result,
         ),
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
         ProgressBar(result: widget.abmResult),
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
         Container(
@@ -359,7 +231,12 @@ class EmotionsGraphState extends State<EmotionsGraph> {
           child: SingleChildScrollView(
             // 스크롤 가능
             child: Center(
-              child: Text(selectData(animalType(widget.animal)! + " " + widget.animal, 'resultText')!, style: TextStyle(fontSize: 20,)), // 결과 출력
+              child: Text(
+                  selectData("${animalType(widget.animal)!} ${widget.animal}",
+                      'resultText')!,
+                  style: const TextStyle(
+                    fontSize: 20,
+                  )), // 결과 출력
             ),
           ),
         ),

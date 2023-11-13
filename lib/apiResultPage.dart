@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import 'animalResult.dart';
+import 'animalTypeResultPage.dart';
 
 class ApiResultPage extends StatelessWidget {
   ApiResultPage({required this.result, required this.audioSource, required this.gender, Key? key}) : super(key: key);
@@ -42,17 +42,12 @@ class ApiResultPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              //AudioPlayerWidget(audioSource: audioSource,),
-                AnimalResult(result: result, gender: gender),
+                //AudioPlayerWidget(audioSource: audioSource,),
+                // 동물 유형 페이지
+                AnimalTypeResult(result: result, gender: gender),
                 const SizedBox(
                   height: 50,
                 ),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     Navigator.pop(context);
-                //   },
-                //   child: Text('Go Back'),
-                // ),
                 // detailPage로 이동
                 ElevatedButton(
                   onPressed: () {

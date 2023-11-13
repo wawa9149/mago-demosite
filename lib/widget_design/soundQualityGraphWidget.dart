@@ -72,7 +72,7 @@ class SoundQualityGraphState extends State<SoundQualityGraph> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("💡 노이즈가 너무 크고 음성의 수치가 너무 높거나, 낮은 경우 테스트 정확도가 떨어질 수 있습니다."),
+          Text("💡 명료도의 수치가 너무 낮고 음성의 수치가 너무 높거나, 낮은 경우 테스트 정확도가 떨어질 수 있습니다."),
           SizedBox(
             height: 30,
           ),
@@ -124,7 +124,7 @@ class SoundQualityGraphState extends State<SoundQualityGraph> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '노이즈',
+                    '명료도',
                     style: TextStyle(fontSize: 20),
                   ),
                   Container(
