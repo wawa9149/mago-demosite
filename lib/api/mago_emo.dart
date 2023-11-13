@@ -6,7 +6,7 @@ import 'package:http_parser/http_parser.dart';
 
 class MagoEMO {
   String apiUrl;
-  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69';
+  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69'; // 토큰 값 따로 빼기
   String? id;
 
   MagoEMO(this.apiUrl);
@@ -62,27 +62,35 @@ class MagoEMO {
   Future<String> getResult(String id) async {
     Completer<String> completer = Completer<String>();
     // Results are not immediately available, so we poll the API until we get a result
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
-      try {
-        var response =
-        await http.get(Uri.parse('$apiUrl/result/$id'), headers: {
-          'accept': 'application/json',
-          'Bearer': key,
-        });
+    Timer.periodic(const Duration(milliseconds: 500), (timer) async {
+      if (timer.tick * 500 >= 30000) {
+        // 30초 이상 경과하면 타이머를 취소하고 오류를 반환합니다.
+        timer.cancel();
+        completer.completeError(TimeoutException('Request timed out'));
+      } else {
+        try {
+          var response = await http.get(
+            Uri.parse('$apiUrl/result/$id'),
+            headers: {
+              'accept': 'application/json',
+              'Bearer': key,
+            },
+          );
 
-        print('EMO response.statusCode: ${response.statusCode}');
-        if (response.statusCode == 200) {
-          var responseBody = utf8.decode(response.bodyBytes);
-          var result = getResultFromJson(responseBody, 'result');
-          if (result != null) {
-            timer.cancel();
-            completer.complete(result);
-          } else {
-            print('No result yet');
+          print('EMO response.statusCode: ${response.statusCode}');
+          if (response.statusCode == 200) {
+            var responseBody = utf8.decode(response.bodyBytes);
+            var result = getResultFromJson(responseBody, 'result');
+            if (result != null) {
+              timer.cancel();
+              completer.complete(result);
+            } else {
+              print('No result yet');
+            }
           }
-        }
-      } catch (e) {
+        } catch (e) {
           completer.completeError(e);
+        }
       }
     });
 
