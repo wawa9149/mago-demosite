@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Container TextResultBox(String? result) {
   return Container(
-    height: 300,
+    height: 250,
     width: 800,
     padding: EdgeInsets.all(16.0),
     decoration: BoxDecoration(
@@ -21,7 +21,7 @@ Container TextResultBox(String? result) {
       // 스크롤 가능
       child: Center(
         //child: Text(result!, style: TextStyle(fontSize: 15,)), // 결과 출력
-        child: Text(resultCheck(result), style: TextStyle(fontSize: 15,)), // 결과 출력
+        child: Text(resultCheck(result), style: TextStyle(fontSize: 18,)), // 결과 출력
       ),
     ),
   );

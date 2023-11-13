@@ -8,8 +8,9 @@ class MagoS2T {
   String apiUrl;
 
   String resultType = 'text';
-  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69';
+  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69'; // 토큰 값 따로 빼기
   String? id;
+
   MagoS2T(this.apiUrl);
 
   // 음성 인식 요청
@@ -32,7 +33,6 @@ class MagoS2T {
   }
 
   Future<String?> upload(Uint8List audioData, String fileName) async {
-    //print('audioData: $audioData, fileName: $fileName');
     try {
       print('uploading...');
       var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/upload'))
@@ -64,30 +64,34 @@ class MagoS2T {
   Future<String> getResult(String id) async {
     Completer<String> completer = Completer<String>();
 
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
-      try {
-        var response = await http.get(
+    Timer.periodic(const Duration(milliseconds: 500), (timer) async {
+      if (timer.tick * 500 >= 30000) {
+        // 30초 이상 경과하면 타이머를 취소하고 오류를 반환합니다.
+        timer.cancel();
+        completer.completeError(TimeoutException('Request timed out'));
+      } else {
+        try {
+          var response = await http.get(
             Uri.parse('$apiUrl/result/$id?result_type=$resultType'),
             headers: {
               'accept': 'application/json',
               'Bearer': key,
-            });
+            },
+          );
 
-        if (response.statusCode == 200) {
-          // var utf16CodeUnits = response.bodyBytes.buffer.asUint16List();
-          // var responseBody = String.fromCharCodes(utf16CodeUnits);
-          var responseBody = utf8.decode(response.bodyBytes);
-          var result = getResultFromJson(responseBody, 'result');
-          //String result = jsonEncode(response.bodyBytes);
-          if (result != null) {
-            timer.cancel();
-            completer.complete(result);
-          } else {
-            print('No result yet');
+          if (response.statusCode == 200) {
+            var responseBody = utf8.decode(response.bodyBytes);
+            var result = getResultFromJson(responseBody, 'result');
+            if (result != null) {
+              timer.cancel();
+              completer.complete(result);
+            } else {
+              print('No result yet');
+            }
           }
+        } catch (e) {
+          completer.completeError(e);
         }
-      } catch (e) {
-        completer.completeError(e);
       }
     });
 
@@ -107,16 +111,11 @@ class MagoS2T {
       if (contentsObject.containsKey('results') == false) {
         return null;
       }
-      String result = json.encode(contentsObject['results']);
-      print('S2T Result: $result');
-      return result;
-      //Map<String, dynamic> resultsObject = contentsObject['results'];
-      // if (resultsObject.containsKey('text') == false) {
-      //   return null;
-      // }
-      // String text = resultsObject['text'];
-      // print('S2T Result: $text');
-      //return text;
+      Map<String, dynamic> result = contentsObject['results'];
+      String text = json.encode(result['text']);
+
+      print('S2T Result: $text');
+      return text;
     }
     return null;
   }

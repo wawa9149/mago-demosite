@@ -7,6 +7,7 @@ import 'mago_abm.dart';
 import 'mago_emo.dart';
 import 'mago_s2t.dart';
 
+// 나중에 magostar 대신에 다른 주소값 대체 해야 함, 변수 설정하거나 파일로 따로 빼기
 class GetApiResult {
   var magoS2t = MagoS2T('https://s2t.magostar.com/speech2text'); // API 객체
   var magoABM = MagoABM('https://abm.magostar.com/abm'); // API 객체

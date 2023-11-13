@@ -19,7 +19,7 @@
         <entry key="archive">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/archive-3.4.7/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/archive-3.4.9/lib" />
             </list>
           </value>
         </entry>
@@ -40,7 +40,7 @@
         <entry key="audio_session">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/audio_session-0.1.16/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/audio_session-0.1.17/lib" />
             </list>
           </value>
         </entry>
@@ -131,7 +131,7 @@
         <entry key="build_daemon">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/build_daemon-4.0.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/build_daemon-4.0.1/lib" />
             </list>
           </value>
         </entry>
@@ -433,6 +433,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_sound_web-9.2.13/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_spinkit">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_spinkit-5.2.0/lib" />
             </list>
           </value>
         </entry>
@@ -740,7 +747,7 @@
         <entry key="provider">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/provider-6.0.5/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/provider-6.1.1/lib" />
             </list>
           </value>
         </entry>
@@ -873,28 +880,28 @@
         <entry key="syncfusion_flutter_charts">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_charts-23.1.43/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_charts-23.1.44/lib" />
             </list>
           </value>
         </entry>
         <entry key="syncfusion_flutter_core">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-23.1.43/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-23.1.44/lib" />
             </list>
           </value>
         </entry>
         <entry key="syncfusion_flutter_gauges">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_gauges-23.1.43/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_gauges-23.1.44/lib" />
             </list>
           </value>
         </entry>
         <entry key="syncfusion_flutter_pdf">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_pdf-23.1.43/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_pdf-23.1.44/lib" />
             </list>
           </value>
         </entry>
@@ -1099,10 +1106,10 @@
     <CLASSES>
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-64.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/analyzer-6.2.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/archive-3.4.7/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/archive-3.4.9/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/args-2.4.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/async-2.11.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audio_session-0.1.16/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audio_session-0.1.17/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers-5.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers_android-4.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers_darwin-5.0.2/lib" />
@@ -1115,7 +1122,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/browser_launcher-1.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/build-2.4.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/build_config-1.1.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/build_daemon-4.0.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/build_daemon-4.0.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/build_modules-5.0.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/build_resolvers-2.4.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/build_runner-2.4.6/lib" />
@@ -1158,6 +1165,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_sound-9.2.13/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_sound_platform_interface-9.2.13/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_sound_web-9.2.13/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_spinkit-5.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/frontend_server_client-3.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/get-4.6.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/glob-2.1.2/lib" />
@@ -1199,7 +1207,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/pointycastle-3.7.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/pool-1.5.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/protobuf-3.1.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/provider-6.0.5/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/provider-6.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/pub_semver-2.1.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/pubspec_parse-1.2.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/recase-4.1.0/lib" />
@@ -1217,10 +1225,10 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/stream_channel-2.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/stream_transform-2.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/string_scanner-1.2.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_charts-23.1.43/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-23.1.43/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_gauges-23.1.43/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_pdf-23.1.43/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_charts-23.1.44/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-23.1.44/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_gauges-23.1.44/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/syncfusion_flutter_pdf-23.1.44/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/synchronized-3.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/term_glyph-1.2.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/test_api-0.6.0/lib" />

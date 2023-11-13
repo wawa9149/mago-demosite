@@ -8,7 +8,7 @@ import 'package:comet/demo/imageResult.dart';
 
 class MagoABM {
   String apiUrl;
-  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69';
+  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69'; // 토큰 값 따로 파일로 빼기
   String? id;
   String resultType = 'all';
 
@@ -33,13 +33,13 @@ class MagoABM {
     return null;
   }
 
-  // Future<Uint8List?> plotRequest(String featureName, String plotId) async {
-  //   print(featureName);
-  //   print('plotId: $plotId');
-  //   Uint8List? result = await plot(plotId!, featureName);
-  //
-  //   return result;
-  // }
+  Future<Uint8List?> plotRequest(String featureName, String plotId) async {
+    print(featureName);
+    print('plotId: $plotId');
+    Uint8List? result = await plot(plotId!, featureName);
+
+    return result;
+  }
 
   String? getId() {
     return id;
@@ -79,29 +79,36 @@ class MagoABM {
   Future<String> getResult(String id) async {
     Completer<String> completer = Completer<String>();
     // Results are not immediately available, so we poll the API until we get a result
-    Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
-      try {
-        var response = await http.get(
+
+    Timer.periodic(const Duration(milliseconds: 500), (timer) async {
+      if (timer.tick * 500 >= 30000) {
+        // 30초 이상 경과하면 타이머를 취소하고 오류를 반환합니다.
+        timer.cancel();
+        completer.completeError(TimeoutException('Request timed out'));
+      } else {
+        try {
+          var response = await http.get(
             Uri.parse('$apiUrl/result/$id?result_type=$resultType'),
             headers: {
               'accept': 'application/json',
               'Bearer': key,
-            });
+            },
+          );
 
-        print('ABM response.statusCode: ${response.statusCode}');
-        if (response.statusCode == 200) {
-          var responseBody = utf8.decode(response.bodyBytes);
-          String? result = getResultFromJson(responseBody, 'result');
-          if (result != null) {
-            timer.cancel();
-            print(result);
-            completer.complete(result);
-          } else {
-            print('No result yet');
+          print('ABM response.statusCode: ${response.statusCode}');
+          if (response.statusCode == 200) {
+            var responseBody = utf8.decode(response.bodyBytes);
+            String? result = getResultFromJson(responseBody, 'result');
+            if (result != null) {
+              timer.cancel();
+              completer.complete(result);
+            } else {
+              print('No result yet');
+            }
           }
+        } catch (e) {
+          completer.completeError(e);
         }
-      } catch (e) {
-        completer.completeError(e);
       }
     });
 
@@ -116,7 +123,6 @@ class MagoABM {
     });
 
     if (response.statusCode == 200) {
-      print('response.bodyBytes: ${response.bodyBytes}');
       return response.bodyBytes; // 이미지 바이트 데이터를 직접 사용
     } else {
       print('Plot failed with status: ${response.statusCode}');
@@ -149,7 +155,7 @@ class MagoABM {
             String message = 'Failed to get biomarkers';
             return message;
           }
-        } else if(contentsObject.containsKey('detail')){
+        } else if (contentsObject.containsKey('detail')) {
           String message = '실패';
           return message;
         } else {
