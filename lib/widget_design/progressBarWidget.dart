@@ -43,7 +43,7 @@ SizedBox add(String feature, String less, String more, double data) {
       children: [
         Text(
           feature,
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 20, fontFamily: 'NanumSquareEB',),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +51,7 @@ SizedBox add(String feature, String less, String more, double data) {
           children: [
             Text(
               less,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, fontFamily: 'NanumSquareEB'),
             ),
             Stack(
               children: <Widget>[
@@ -103,7 +103,7 @@ SizedBox add(String feature, String less, String more, double data) {
             ),
             Text(
               more,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, fontFamily: 'NanumSquareEB',),
             ),
           ],
         ),

@@ -64,7 +64,7 @@ class AnimalTypeResultState extends State<AnimalTypeResult> {
 
 String AnimalTestResult(List<double> abmResult, String gender) {
   double speed = abmResult[0];
-  double pitch = abmResult[1];
+  double pitch = abmResult[3];
   double shimmer = abmResult[2];
 
   const double malePitchThreshold = 125;
@@ -76,29 +76,33 @@ String AnimalTestResult(List<double> abmResult, String gender) {
 
   // Determine pitch threshold based on gender
   double pitchThreshold = (gender == '남') ? malePitchThreshold : femalePitchThreshold;
+  print('gender: $gender, pitchThreshold: $pitchThreshold');
+  print('speed: $speed, pitch: $pitch, shimmer: $shimmer');
 
   // Determine animal based on criteria
   if (speed < speedThreshold) {
     if (pitch < pitchThreshold && shimmer < shimmerThreshold) {
-      animal = '달팽이';
+      animal = 'snail';
     } else if (pitch < pitchThreshold && shimmer > shimmerThreshold) {
-      animal = '소';
+      animal = 'cow';
     } else if (pitch > pitchThreshold && shimmer < shimmerThreshold) {
-      animal = '백조';
+      animal = 'swan';
     } else if (pitch > pitchThreshold && shimmer > shimmerThreshold) {
-      animal = '양';
+      animal = 'sheep';
     }
   } else {
     if (pitch < pitchThreshold && shimmer < shimmerThreshold) {
-      animal = '사자';
+      animal = 'lion';
     } else if (pitch > pitchThreshold && shimmer < shimmerThreshold) {
-      animal = '두더지';
+      animal = 'mole';
     } else if (pitch < pitchThreshold && shimmer > shimmerThreshold) {
-      animal = '햄스터';
+      animal = 'hamster';
     } else if (pitch > pitchThreshold && shimmer > shimmerThreshold) {
-      animal = '참새';
+      animal = 'bird';
     }
   }
+
+  print('animal: $animal');
 
   return animal;
 }

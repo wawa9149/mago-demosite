@@ -68,28 +68,63 @@ class EmotionsGraphState extends State<EmotionsGraph> {
     switch (text) {
       case 'NEUTRAL':
         emotionPrefix = '평온한';
-        emotionImage = 'assets/images/neutral_rabbit.jpeg';
-        emotionResultText = '결과 텍스트';
+        emotionImage = 'assets/images/neutral_$animal.png';
+        switch (animal){
+          case 'snail': emotionResultText = '"평온한 달팽이"\n당신은 여유 있고 안정적인 목소리를 갖고 있네요.\n말투가 부드럽고, 느긋하며, 무엇이든지 차분하게 말하는 스타일이에요.\n크게 톤의 변화가 없고 없고 여유 있는 말투로 주변 사람들이 안정감을 느끼게 해요.';
+          case 'cow': emotionResultText = '"평온한 소"\n당신은 느긋하고 깊은 목소리를 갖고 있네요.\n목소리에 약간의 떨림이 있지만 음역대가 낮고 여유있는 말투의 소유자입니다.\n';
+          case 'swan': emotionResultText = '"평온한 수면 위의 백조"\n당신은 우아하고 안정적인 목소리를 갖고 있네요.\n목소리에 자신감이 넘치고, 높은 음역대로 뛰어난 전달력을 가지고 있어요.\n';
+          case 'sheep': emotionResultText = '"평온한 들판 위의 양"\n당신은 느긋하고 명랑한 목소리를 갖고 있네요.\n목소리에 약간의 떨림이 있지만 음역대가 높고 여유있는 말투의 소유자입니다.';
+          case 'lion': emotionResultText = '"여유롭게 낮잠 자는 사자"\n당신은 용맹하고 우렁찬 목소리를 가지고 있네요.\n목소리에 자신감이 넘치고, 모두가 알아들을 수 있는 정확한 발음의 소유자입니다. 담백한 저음이 매력적이네요.\n빠르고 올곧은 말투가 주변 사람들에게 신뢰를 주어, 무리에서 이끄는 역할을 하기 제격이에요.';
+          case 'mole': emotionResultText = '"땅굴 속에서 낮잠 자는 두더지"\n당신은 목소리가 낮고 떨림이 있으며 말이 빠른편입니다.';
+          case 'hamster': emotionResultText = '"빠르게 쳇바퀴를 굴리는 햄스터"\n당신은 목소리가 높고 안정감이 있으며 말이 빠른편입니다.';
+          case 'bird': emotionResultText = '"종알종알 지저귀는 참새"\n당신은 목소리가 높고 떨림이 있으며 말이 빠른편입니다.';
+        }
         break;
       case 'ANGRY':
         emotionPrefix = '뿔난';
-        emotionImage = 'assets/images/angry_rabbit.jpeg';
-        emotionResultText = '결과 텍스트';
+        emotionImage = 'assets/images/angry_$animal.png';
+        switch (animal){
+          case 'snail': emotionResultText = '"뿔난 달팽이"\n당신은 여유 있고 안정적인 목소리를 갖고 있네요.\n말투가 부드럽고, 느긋하며, 무엇이든지 차분하게 말하는 스타일이에요.\n크게 톤의 변화가 없고 없고 여유 있는 말투로 주변 사람들이 안정감을 느끼게 해요.\n하지만 지금, 화난 당신의 감정을 알아차리기 힘들 수 있어요. 차분한 말투로 대화하되 상대방이 당신의 감정을 정확하게 이해할 수 있도록 전달하는 게 중요해요.';
+          case 'cow': emotionResultText = '"씩씩거리는 소"\n당신은 느긋하고 깊은 목소리를 갖고 있네요.\n목소리에 약간의 떨림이 있지만 음역대가 낮고 여유있는 말투의 소유자입니다.\n';
+          case 'swan': emotionResultText = '"날개를 퍼덕이는 백조"\n당신은 우아하고 안정적인 목소리를 갖고 있네요.\n목소리에 자신감이 넘치고, 높은 음역대로 뛰어난 전달력을 가지고 있어요.\n';
+          case 'sheep': emotionResultText = '"뿔난 양"\n당신은 느긋하고 명랑한 목소리를 갖고 있네요.\n목소리에 약간의 떨림이 있지만 음역대가 높고 여유있는 말투의 소유자입니다.';
+          case 'lion': emotionResultText = '"으르렁 거리는 사자"\n당신은 용맹하고 우렁찬 목소리를 가지고 있네요.\n목소리에 자신감이 넘치고, 모두가 알아들을 수 있는 정확한 발음의 소유자입니다. 담백한 저음이 매력적이네요.\n빠르고 올곧은 말투가 주변 사람들에게 신뢰를 주어, 무리에서 이끄는 역할을 하기 제격이에요.\n하지만 지금, 으르렁대는 당신을 누군가는 무서워할 수 있으니 차분하게 대화할 필요가 있어요.';
+          case 'mole': emotionResultText = '"빠르게 굴을 파는 두더지"\n당신은 목소리가 낮고 떨림이 있으며 말이 빠른편입니다.';
+          case 'hamster': emotionResultText = '"빠르게 쳇바퀴를 굴리는 햄스터"\n당신은 목소리가 높고 안정감이 있으며 말이 빠른편입니다.';
+          case 'bird': emotionResultText = '"종알종알 지저귀는 참새"\n당신은 목소리가 높고 떨림이 있으며 말이 빠른편입니다.';
+        }
         break;
       case 'SADNESS':
         emotionPrefix = '슬픈';
-        emotionImage = 'assets/images/sad_rabbit.jpeg';
-        emotionResultText = '결과 텍스트';
+        emotionImage = 'assets/images/sad_$animal.png';
+        switch (animal){
+          case 'snail': emotionResultText = '"슬픈 달팽이"\n당신은 여유 있고 안정적인 목소리를 갖고 있네요.\n말투가 부드럽고, 느긋하며, 무엇이든지 차분하게 말하는 스타일이에요.\n크게 톤의 변화가 없고 없고 여유 있는 말투로 주변 사람들이 안정감을 느끼게 해요.\n하지만 지금, 슬픈 당신의 감정을 알아차리기 힘들 수 있어요. 차분한 말투로 대화하되 상대방이 당신의 감정을 정확하게 이해할 수 있도록 전달하는 게 중요해요.';
+          case 'cow': emotionResultText = '"슬픈 소"\n당신은 느긋하고 깊은 목소리를 갖고 있네요.\n목소리에 약간의 떨림이 있지만 음역대가 낮고 여유있는 말투의 소유자입니다.';
+          case 'swan': emotionResultText = '"슬픈 백조"\n당신은 우아하고 안정적인 목소리를 갖고 있네요.\n목소리에 자신감이 넘치고, 높은 음역대로 뛰어난 전달력을 가지고 있어요.\n';
+          case 'sheep': emotionResultText = '"슬픈 양"\n당신은 느긋하고 명랑한 목소리를 갖고 있네요.\n목소리에 약간의 떨림이 있지만 음역대가 높고 여유있는 말투의 소유자입니다.';
+          case 'lion': emotionResultText = '"슬픈 사자"\n당신은 용맹하고 우렁찬 목소리를 가지고 있네요.\n목소리에 자신감이 넘치고, 모두가 알아들을 수 있는 정확한 발음의 소유자입니다. 담백한 저음이 매력적이네요.\n빠르고 올곧은 말투가 주변 사람들에게 신뢰를 주어, 무리에서 이끄는 역할을 하기 제격이에요.';
+          case 'mole': emotionResultText = '"슬픈 두더지"\n당신은 목소리가 낮고 떨림이 있으며 말이 빠른편입니다.';
+          case 'hamster': emotionResultText = '"슬픈 햄스터"\n당신은 목소리가 높고 안정감이 있으며 말이 빠른편입니다.';
+          case 'bird': emotionResultText = '"슬픈 참새"\n당신은 목소리가 높고 떨림이 있으며 말이 빠른편입니다.';
+        }
         break;
       case 'HAPPINESS':
         emotionPrefix = '행복한';
-        emotionImage = 'assets/images/happy_rabbit.jpeg';
-        emotionResultText = '결과 텍스트';
+        emotionImage = 'assets/images/happy_$animal.png';
+        switch (animal){
+          case 'snail': emotionResultText = '"행복한 달팽이"\n당신은 여유 있고 안정적인 목소리를 갖고 있네요.\n말투가 부드럽고, 느긋하며, 무엇이든지 차분하게 말하는 스타일이에요.\n크게 톤의 변화가 없고 없고 여유 있는 말투로 주변 사람들이 안정감을 느끼게 해요.\n차분한 말투로 대화하되 상대방이 당신의 감정을 정확하게 이해할 수 있도록 전달하는 게 중요해요.';
+          case 'cow': emotionResultText = '"행복한 소"\n당신은 느긋하고 깊은 목소리를 갖고 있네요.\n목소리에 약간의 떨림이 있지만 음역대가 낮고 여유있는 말투의 소유자입니다.';
+          case 'swan': emotionResultText = '"행복한 백조"\n당신은 우아하고 안정적인 목소리를 갖고 있네요.\n목소리에 자신감이 넘치고, 높은 음역대로 뛰어난 전달력을 가지고 있어요.\n';
+          case 'sheep': emotionResultText = '"행복한 양"\n당신은 느긋하고 명랑한 목소리를 갖고 있네요.\n목소리에 약간의 떨림이 있지만 음역대가 높고 여유있는 말투의 소유자입니다.';
+          case 'lion': emotionResultText = '"행복한 사자"\n당신은 용맹하고 우렁찬 목소리를 가지고 있네요.\n목소리에 자신감이 넘치고, 모두가 알아들을 수 있는 정확한 발음의 소유자입니다. 담백한 저음이 매력적이네요.\n빠르고 올곧은 말투가 주변 사람들에게 신뢰를 주어, 무리에서 이끄는 역할을 하기 제격이에요.';
+          case 'mole': emotionResultText = '"행복한 두더지"\n당신은 목소리가 낮고 떨림이 있으며 말이 빠른편입니다.';
+          case 'hamster': emotionResultText = '"행복한 햄스터"\n당신은 목소리가 높고 안정감이 있으며 말이 빠른편입니다.';
+          case 'bird': emotionResultText = '"행복한 참새"\n당신은 목소리가 높고 떨림이 있으며 말이 빠른편입니다.';
+        }
         break;
       default:
         return null; // 처리하지 않은 감정인 경우 null 반환 또는 예외 처리 추가
     }
-
     if (animal.isNotEmpty) {
       animalList.add(AnimalType(
         animal: '$emotionPrefix $animal',
@@ -97,7 +132,6 @@ class EmotionsGraphState extends State<EmotionsGraph> {
         resultText: emotionResultText,
       ));
     }
-
     return emotionPrefix;
   }
 
@@ -131,6 +165,21 @@ class EmotionsGraphState extends State<EmotionsGraph> {
     } else {
       print('원하는 동물을 찾지 못했습니다.');
     }
+  }
+
+  String animalName(String animal){
+    String name = '';
+    switch (animal){
+      case 'snail': name = '달팽이';
+      case 'cow': name = '소';
+      case 'swan': name = '백조';
+      case 'sheep': name = '양';
+      case 'lion': name = '사자';
+      case 'mole': name = '두더지';
+      case 'hamster': name = '햄스터';
+      case 'bird': name = '새';
+    }
+    return name;
   }
 
   @override
@@ -167,10 +216,10 @@ class EmotionsGraphState extends State<EmotionsGraph> {
       children: [
         SizedBox(height: 100),
         Text('당신의 음성 유형은?',
-            style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold)),
-        SizedBox(height: 20),
-        Text('"' + animalType(widget.animal)! + " " + widget.animal! + '" 입니다!',
             style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold)),
+        SizedBox(height: 20),
+        Text('"' + animalType(widget.animal)! + " " + animalName(widget.animal!) + '" 입니다!',
+            style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
         SizedBox(height: 50),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -230,13 +279,17 @@ class EmotionsGraphState extends State<EmotionsGraph> {
           ),
           child: SingleChildScrollView(
             // 스크롤 가능
-            child: Center(
-              child: Text(
-                  selectData("${animalType(widget.animal)!} ${widget.animal}",
-                      'resultText')!,
-                  style: const TextStyle(
-                    fontSize: 20,
-                  )), // 결과 출력
+            child: Container(
+              padding: EdgeInsets.all(16.0),
+              child: Center(
+                child: Text(
+                    selectData("${animalType(widget.animal)!} ${widget.animal}",
+                        'resultText')!,
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
+                ), // 결과 출력
+              ),
             ),
           ),
         ),

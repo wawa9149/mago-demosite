@@ -95,10 +95,38 @@ flutter:
     - assets/images/Icon_file.png
     - assets/images/background_file.png
     - assets/images/background_main.png
-    - assets/images/angry_rabbit.jpeg
-    - assets/images/happy_rabbit.jpeg
-    - assets/images/sad_rabbit.jpeg
-    - assets/images/neutral_rabbit.jpeg
+    - assets/images/angry_swan.png
+    - assets/images/happy_swan.png
+    - assets/images/sad_swan.png
+    - assets/images/neutral_swan.png
+    - assets/images/angry_snail.png
+    - assets/images/happy_snail.png
+    - assets/images/sad_snail.png
+    - assets/images/neutral_snail.png
+    - assets/images/angry_cow.png
+    - assets/images/happy_cow.png
+    - assets/images/sad_cow.png
+    - assets/images/neutral_cow.png
+    - assets/images/angry_lion.png
+    - assets/images/happy_lion.png
+    - assets/images/sad_lion.png
+    - assets/images/neutral_lion.png
+    - assets/images/angry_bird.png
+    - assets/images/happy_bird.png
+    - assets/images/sad_bird.png
+    - assets/images/neutral_bird.png
+    - assets/images/angry_mole.png
+    - assets/images/happy_mole.png
+    - assets/images/sad_mole.png
+    - assets/images/neutral_mole.png
+    - assets/images/angry_hamster.png
+    - assets/images/happy_hamster.png
+    - assets/images/sad_hamster.png
+    - assets/images/neutral_hamster.png
+    - assets/images/angry_sheep.png
+    - assets/images/happy_sheep.png
+    - assets/images/sad_sheep.png
+    - assets/images/neutral_sheep.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
