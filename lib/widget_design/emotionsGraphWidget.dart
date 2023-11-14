@@ -214,7 +214,6 @@ class EmotionsGraphState extends State<EmotionsGraph> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 100),
         Text('당신의 음성 유형은?',
             style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold)),
         SizedBox(height: 20),

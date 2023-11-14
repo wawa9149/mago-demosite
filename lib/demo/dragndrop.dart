@@ -252,142 +252,17 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
             width: 200,
             height: 50,
             child: audioFile.isNotEmpty
-                //버튼을 누르면 음성 인식 요청
                 ? ElevatedButton(
-                    onPressed: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FutureBuilder<List<String?>>(
-                            future: GetApiResult(audioFile, audioFileName)
-                                .getApiResult(),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                // 로딩 중일 때 표시할 위젯 (로딩창)
-                                return Center(child: LoadingPage());
-                              } else if (snapshot.hasError) {
-                                // 에러 발생 시 표시할 위젯
-                                return Center(
-                                    child: Text('에러 발생: ${snapshot.error}'));
-                              } else if (snapshot.hasData) {
-                                // 성별 선택 버튼
-                                return Container(
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      fit: BoxFit.fitWidth,
-                                      alignment: Alignment.bottomCenter,
-                                      image: AssetImage(
-                                          'assets/images/background_file.png'), // 배경 이미지
-                                    ),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const DefaultTextStyle(
-                                        style: TextStyle(
-                                            fontSize: 45,
-                                            fontWeight: FontWeight.bold,
-                                            ),
-                                        child: Text('당신의 음성 유형은?'),
-                                      ),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                      const DefaultTextStyle(
-                                        style: TextStyle(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold,
-                                            ),
-                                        child: Text('성별을 선택하시면 결과 페이지로 이동합니다.'),
-                                      ),
-                                      const SizedBox(
-                                        height: 80,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Get.to(ApiResultPage(
-                                                  result: snapshot.data!,
-                                                  audioSource: audioFile,
-                                                  gender: '남'));
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              minimumSize: Size(100, 80),
-                                              backgroundColor:
-                                                  const Color.fromRGBO(
-                                                      71, 105, 31, 0.5),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                            ),
-                                            child: const Text(
-                                              '남',
-                                              style: TextStyle(
-                                                fontSize: 25,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 100,
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Get.to(ApiResultPage(
-                                                  result: snapshot.data!,
-                                                  audioSource: audioFile,
-                                                  gender: '여'));
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              minimumSize: Size(100, 80),
-                                              backgroundColor:
-                                                  const Color.fromRGBO(
-                                                      71, 105, 31, 0.5),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                            ),
-                                            child: const Text(
-                                              '여',
-                                              style: TextStyle(
-                                                fontSize: 25,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                );
-                                // 데이터를 받아왔을 때 표시할 위젯
-                                // 결과 받아오기 버튼과 함께 버튼 입력하면 결과 페이지로 이동
-                                //Get.to(ApiResultPage(result: snapshot.data!, audioSource: audioFile));
-                                // return ApiResultPage(
-                                //   result: snapshot.data!,
-                                //   audioSource: audioFile,
-                                // );
-                              } else {
-                                // 다른 예외 상황 처리 (데이터가 없는 경우 등)
-                                return Center(child: Text('예외 상황 처리'));
-                              }
-                            },
-                          ),
-                        ),
-                      );
+                    onPressed: () {
+                      Get.to(SelectedGender(
+                          audioFile: audioFile, audioFileName: audioFileName));
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(71, 105, 31, 0.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(71, 105, 31, 0.5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
                     ),
+                  ),
                     child: const Text(
                       '결과 확인',
                       style: TextStyle(
@@ -407,6 +282,147 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
     List<String> allowedExtensions = ['mp3', 'wav', 'flac']; // 허용되는 확장자 목록
     String extension = fileName.split('.').last.toLowerCase();
     return allowedExtensions.contains(extension);
+  }
+}
+
+class SelectedGender extends StatelessWidget {
+  SelectedGender(
+      {required this.audioFileName, required this.audioFile, super.key});
+
+  String audioFileName = '';
+  Uint8List audioFile = Uint8List(0);
+
+  @override
+  Widget build(BuildContext context) {
+    final ButtonStyle textButtonStyle = TextButton.styleFrom(
+      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      minimumSize: Size(120, 0),
+      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+    );
+    final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
+      minimumSize: Size(100, 80),
+      backgroundColor: const Color.fromRGBO(71, 105, 31, 0.5),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+
+    ElevatedButton api(String gender) {
+      return ElevatedButton(
+        onPressed: () async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FutureBuilder<List<String?>>(
+                future: GetApiResult(audioFile, audioFileName).getApiResult(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // 로딩 중일 때 표시할 위젯 (로딩창)
+                    return Center(child: LoadingPage());
+                  } else if (snapshot.hasError) {
+                    // 에러 발생 시 표시할 위젯
+                    return Center(child: Text('에러 발생: ${snapshot.error}'));
+                  } else if (snapshot.hasData) {
+                    // 성별 선택 버튼
+                    // return
+                    // 데이터를 받아왔을 때 표시할 위젯
+                    // 결과 받아오기 버튼과 함께 버튼 입력하면 결과 페이지로 이동
+                    //Get.to(ApiResultPage(result: snapshot.data!, audioSource: audioFile));
+                    return ApiResultPage(
+                      result: snapshot.data!,
+                      audioSource: audioFile,
+                      gender: gender,
+                    );
+                  } else {
+                    // 다른 예외 상황 처리 (데이터가 없는 경우 등)
+                    return Center(child: Text('예외 상황 처리'));
+                  }
+                },
+              ),
+            ),
+          );
+        },
+        style: buttonStyle,
+        child: Text(
+          gender,
+          style: const TextStyle(
+            fontSize: 25,
+            color: Colors.white,
+          ),
+        ),
+      );
+    }
+
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBarMenu(textButtonStyle),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.bottomCenter,
+            image: AssetImage('assets/images/background_file.png'), // 배경 이미지
+          ),
+        ),
+        child: Center(
+          child: Container(
+           // margin: const EdgeInsets.all(100),
+            // 상단 여백 조절
+            height: 400,
+            width: 580,
+            padding: EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white, // 배경색
+              borderRadius: BorderRadius.circular(10), // 테두리의 모서리를 둥글게 만듦
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.grey, // 그림자의 색상
+                  offset: Offset(0, 5), // 그림자의 위치 (가로, 세로)
+                  blurRadius: 10, // 그림자의 흐림 정도
+                  spreadRadius: 2, // 그림자의 확산 정도
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const DefaultTextStyle(
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  child: Text('당신의 음성 유형은?'),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                const DefaultTextStyle(
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(102, 102, 102, 1),
+                  ),
+                  child: Text('성별을 선택하시면 결과 페이지로 이동합니다.'),
+                ),
+                const SizedBox(
+                  height: 80,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    api('남'),
+                    SizedBox(
+                      width: 100,
+                    ),
+                    api('여'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
