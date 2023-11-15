@@ -115,12 +115,9 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
                     if (result != null && result.files.isNotEmpty) {
                       audioFileName = result.files.first.name;
                       audioFile = result.files.first.bytes!;
-                      log('실행');
-                      //uploadFile(result.files.first.bytes!, result.files.first.extension!);
 
                       setState(() {
                         showFileName = "Now File Name: $audioFileName";
-                        log('file');
                       });
                     }
                   },
@@ -176,7 +173,7 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Invalid File'),
-          content: Text('Only audio files (mp3, wav, flac) are allowed.'),
+          content: Text('Only audio files (mp3, wav, flac, aac) are allowed.'),
           actions: [
             TextButton(
               onPressed: () {
@@ -213,7 +210,6 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
               debugPrint('onDragDone:');
               if (detail.files.isNotEmpty) {
                 audioFileName = detail.files.first.name;
-                //audioFile = await detail.files.first.readAsBytes();
                 // 파일의 확장자 확인
                 if (isAllowedFileExtension(audioFileName)) {
                   Uint8List fileBytes = await detail.files.first.readAsBytes();
@@ -225,9 +221,6 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
                   debugPrint('Invalid file extension. File not processed.');
                   showInvalidFileAlert();
                 }
-                // setState(() {
-                //   showFileName = "Now File Name: $audioFileName";
-                // });
               }
             },
             onDragEntered: (detail) {
@@ -279,7 +272,7 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
   }
 
   bool isAllowedFileExtension(String fileName) {
-    List<String> allowedExtensions = ['mp3', 'wav', 'flac']; // 허용되는 확장자 목록
+    List<String> allowedExtensions = ['mp3', 'wav', 'flac', 'aac']; // 허용되는 확장자 목록
     String extension = fileName.split('.').last.toLowerCase();
     return allowedExtensions.contains(extension);
   }

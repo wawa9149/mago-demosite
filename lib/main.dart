@@ -5,14 +5,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'apiRequestPage.dart';
-//import 'firebase_options.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
-  print('시작');
   runApp(const GetMaterialApp(home: MyApp()));
 }
 
@@ -73,17 +67,9 @@ class MyWidget extends StatelessWidget {
                 const SizedBox(
                   height: 200,
                 ),
-                //Align(
-                //alignment: Alignment(-0.8, 0.55),
-                //child: ElevatedButton(
                 ElevatedButton(
                   onPressed: () {
                     Get.to(const ApiRequestPage());
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const ApiRequestPage()),
-                    // );
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(250, 65),
