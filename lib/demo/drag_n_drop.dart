@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../apiResultPage.dart';
-import '../api/getApiResult.dart';
+import '../api/api_request.dart';
 import '../widget_design/appBar.dart';
 
 class ExampleDragTarget extends StatefulWidget {
@@ -404,7 +404,7 @@ class ExampleDragTargetState extends State<ExampleDragTarget> {
   }
 
   bool isAllowedFileExtension(String fileName) {
-    List<String> allowedExtensions = ['mp3', 'wav', 'flac']; // 허용되는 확장자 목록
+    List<String> allowedExtensions = ['mp3', 'wav', 'flac', 'aac', 'm4a']; // 허용되는 확장자 목록
     String extension = fileName.split('.').last.toLowerCase();
     return allowedExtensions.contains(extension);
   }

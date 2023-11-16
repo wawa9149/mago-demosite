@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:typed_data';
 
-import 'package:comet/api/getApiResult.dart';
+import 'package:comet/api/api_request.dart';
 import 'package:flutter/material.dart';
 import 'package:comet/api/mago_abm.dart';
 
@@ -23,7 +23,7 @@ const List<Widget> featureName = <Widget>[
 ];
 
 class ImageResultState extends State<ImageResult> {
-  var magoABM = MagoABM('https://abm.magostar.com/abm'); // API 객체
+  var magoABM = MagoABM('https://abm.magostar.com/abm', 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69'); // API 객체
   final List<bool> _selectedFeatures = <bool>[true, false, false, false, false];
   final List<String> features = <String>[
     'Pitch',
