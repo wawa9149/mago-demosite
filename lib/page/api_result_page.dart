@@ -1,15 +1,12 @@
 import 'dart:typed_data';
 
-import 'package:comet/detailPage.dart';
-import 'package:comet/widget_design/emotionsGraphWidget.dart';
-import 'package:comet/widget_design/progressBarWidget.dart';
-import 'package:comet/widget_design/appBar.dart';
-import 'package:comet/widget_design/soundQualityGraphWidget.dart';
+import 'package:comet/page/detail_result_page.dart';
+import 'package:comet/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import 'animalTypeResultPage.dart';
+import 'animal_type_result_page.dart';
 
 class ApiResultPage extends StatelessWidget {
   ApiResultPage({required this.result, required this.audioSource, required this.gender, Key? key}) : super(key: key);
@@ -20,15 +17,8 @@ class ApiResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final ButtonStyle textButtonStyle = TextButton.styleFrom(
-      foregroundColor: Theme.of(context).colorScheme.onPrimary,
-      minimumSize: Size(120, 0),
-      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-    );
-
     return Scaffold(
-      appBar: AppBarMenu(textButtonStyle),
+      appBar: AppBarMenu(),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

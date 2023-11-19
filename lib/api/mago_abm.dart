@@ -121,6 +121,8 @@ class MagoABM {
       'accept': 'application/json',
       'Bearer': key,
     });
+    print('feature_name: $featureName');
+    print('plot_id: $id');
 
     if (response.statusCode == 200) {
       return response.bodyBytes; // 이미지 바이트 데이터를 직접 사용
