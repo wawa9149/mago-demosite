@@ -1,11 +1,7 @@
-import 'package:comet/widget_design/appBar.dart';
-import 'package:comet/widget_design/textResultBox.dart';
+import 'package:comet/widget/app_bar.dart';
+import 'package:comet/widget/text_result_style.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
-import 'apiRequestPage.dart';
-import 'demo/imageResult.dart';
+import '../result/abm_image_result.dart';
 
 class DetailPage extends StatelessWidget {
   DetailPage({required this.result, Key? key}) : super(key: key);
@@ -13,13 +9,8 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle textButtonStyle = TextButton.styleFrom(
-      foregroundColor: Theme.of(context).colorScheme.onPrimary,
-      minimumSize: Size(120, 0),
-      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-    );
     return Scaffold(
-      appBar: AppBarMenu(textButtonStyle),
+      appBar: AppBarMenu(),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

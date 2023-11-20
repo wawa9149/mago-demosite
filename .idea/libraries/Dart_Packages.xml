@@ -47,14 +47,14 @@
         <entry key="audioplayers">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers-5.2.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers-5.2.1/lib" />
             </list>
           </value>
         </entry>
         <entry key="audioplayers_android">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers_android-4.0.2/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers_android-4.0.3/lib" />
             </list>
           </value>
         </entry>
@@ -544,21 +544,21 @@
         <entry key="just_audio">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio-0.9.35/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio-0.9.36/lib" />
             </list>
           </value>
         </entry>
         <entry key="just_audio_platform_interface">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio_platform_interface-4.2.1/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio_platform_interface-4.2.2/lib" />
             </list>
           </value>
         </entry>
         <entry key="just_audio_web">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio_web-0.4.8/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio_web-0.4.9/lib" />
             </list>
           </value>
         </entry>
@@ -1110,8 +1110,8 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/args-2.4.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/async-2.11.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audio_session-0.1.17/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers-5.2.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers_android-4.0.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers-5.2.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers_android-4.0.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers_darwin-5.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers_linux-3.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audioplayers_platform_interface-6.1.0/lib" />
@@ -1178,9 +1178,9 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/js-0.6.7/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/json_annotation-4.8.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/json_rpc_2-3.0.2/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio-0.9.35/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio_platform_interface-4.2.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio_web-0.4.8/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio-0.9.36/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio_platform_interface-4.2.2/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio_web-0.4.9/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/lints-2.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/logger-1.4.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/logging-1.2.0/lib" />
