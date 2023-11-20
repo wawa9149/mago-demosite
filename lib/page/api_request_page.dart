@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:comet/widget_design/appBar.dart';
-import 'demo/dragndrop.dart';
+import 'package:comet/widget/app_bar.dart';
+
+import 'file_upload_page.dart';
 
 class ApiRequestPage extends StatelessWidget {
   const ApiRequestPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle textButtonStyle = TextButton.styleFrom(
-      foregroundColor: Theme.of(context).colorScheme.onPrimary,
-      minimumSize: Size(120, 0),
-      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-    );
     return Scaffold(
       backgroundColor: Colors.transparent, // 배경색을 투명으로 설정
-      appBar: AppBarMenu(textButtonStyle),
+      appBar: AppBarMenu(),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

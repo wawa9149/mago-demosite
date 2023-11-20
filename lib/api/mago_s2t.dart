@@ -1,6 +1,8 @@
+import 'dart:developer';
 import 'dart:typed_data';
 import 'dart:async';
 import 'dart:convert';
+import 'package:comet/api/api_result_parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
@@ -8,10 +10,10 @@ class MagoS2T {
   String apiUrl;
 
   String resultType = 'text';
-  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69'; // 토큰 값 따로 빼기
+  String key; // 토큰 값 따로 빼기
   String? id;
 
-  MagoS2T(this.apiUrl);
+  MagoS2T(this.apiUrl, this.key);
 
   // 음성 인식 요청
   Future<String?> uploadAndProcessAudio(
@@ -20,21 +22,21 @@ class MagoS2T {
     try {
       // 파일 업로드
       id = await upload(fileBytes, audioFileName);
-      print('S2T Uploaded with ID: $id');
+      log('S2T Uploaded with ID: $id');
 
       // 결과 가져오기
       String? result = await getResult(id!);
 
       return result;
     } catch (e) {
-      print('Error: $e');
+      log('Error: $e');
     }
     return null;
   }
 
   Future<String?> upload(Uint8List audioData, String fileName) async {
     try {
-      print('uploading...');
+      log('uploading...');
       var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/upload'))
         ..headers['accept'] = 'application/json'
         ..headers['Bearer'] = key
@@ -50,13 +52,14 @@ class MagoS2T {
 
       if (response.statusCode == 200) {
         var responseBody = await response.stream.bytesToString();
-        String? id = getResultFromJson(responseBody, 'upload');
+        String? id =
+            ApiResultParser.getResultFromJson('s2t', responseBody, 'upload');
         return id;
       } else {
-        print('Upload failed with status: ${response.statusCode}');
+        log('Upload failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error uploading file: $e');
+      log('Error uploading file: $e');
     }
     return null;
   }
@@ -81,12 +84,13 @@ class MagoS2T {
 
           if (response.statusCode == 200) {
             var responseBody = utf8.decode(response.bodyBytes);
-            var result = getResultFromJson(responseBody, 'result');
-            if (result != null) {
+            var result = ApiResultParser.getResultFromJson(
+                's2t', responseBody, 'result');
+            if(result != null) {
               timer.cancel();
               completer.complete(result);
             } else {
-              print('No result yet');
+              log('No result yet');
             }
           }
         } catch (e) {
@@ -96,27 +100,5 @@ class MagoS2T {
     });
 
     return completer.future;
-  }
-
-  String? getResultFromJson(String jsonResponse, String status) {
-    Map<String, dynamic> jsonObject = json.decode(jsonResponse);
-
-    if (status == 'upload') {
-      Map<String, dynamic> contentsObject = jsonObject['contents'];
-      String id = contentsObject['id'];
-      return id;
-    } else if (status == 'result') {
-      Map<String, dynamic> contentsObject = jsonObject['contents'];
-      //print(contentsObject);
-      if (contentsObject.containsKey('results') == false) {
-        return null;
-      }
-      Map<String, dynamic> result = contentsObject['results'];
-      String text = json.encode(result['text']);
-
-      print('S2T Result: $text');
-      return text;
-    }
-    return null;
   }
 }

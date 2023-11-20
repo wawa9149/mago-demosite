@@ -1,18 +1,18 @@
+import 'dart:developer';
 import 'dart:typed_data';
 import 'dart:async';
 import 'dart:convert';
-import 'package:comet/demo/imageResult.dart';
+import 'package:comet/api/api_result_parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:comet/demo/imageResult.dart';
 
 class MagoABM {
   String apiUrl;
-  String key = 'eadc5d8d-ahno-9559-yesa-8c053e0f1f69'; // 토큰 값 따로 파일로 빼기
+  String key; // 토큰 값 따로 파일로 빼기
   String? id;
   String resultType = 'all';
 
-  MagoABM(this.apiUrl);
+  MagoABM(this.apiUrl, this.key);
 
   // 음성 인식 요청
   Future<String?> uploadAndProcessAudio(
@@ -21,22 +21,22 @@ class MagoABM {
     try {
       // 파일 업로드
       id = await upload(fileBytes, audioFileName);
-      print('ABM Uploaded with ID: $id');
+      log('ABM Uploaded with ID: $id');
 
       // 결과 가져오기
       String? result = await getResult(id!);
 
       return result;
     } catch (e) {
-      print('ABM Error: $e');
+      log('ABM Error: $e');
     }
     return null;
   }
 
   Future<Uint8List?> plotRequest(String featureName, String plotId) async {
-    print(featureName);
-    print('plotId: $plotId');
-    Uint8List? result = await plot(plotId!, featureName);
+    log(featureName);
+    log('plotId: $plotId');
+    Uint8List? result = await plot(plotId, featureName);
 
     return result;
   }
@@ -65,13 +65,13 @@ class MagoABM {
 
       if (response.statusCode == 200) {
         var responseBody = await response.stream.bytesToString();
-        String? id = getResultFromJson(responseBody, 'upload');
+        String? id = ApiResultParser.getResultFromJson('abm', responseBody, 'upload');
         return id;
       } else {
-        print('Upload failed with status: ${response.statusCode}');
+        log('Upload failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      print('ABM Error uploading file: $e');
+      log('ABM Error uploading file: $e');
     }
     return null;
   }
@@ -95,15 +95,15 @@ class MagoABM {
             },
           );
 
-          print('ABM response.statusCode: ${response.statusCode}');
+          log('ABM response.statusCode: ${response.statusCode}');
           if (response.statusCode == 200) {
             var responseBody = utf8.decode(response.bodyBytes);
-            String? result = getResultFromJson(responseBody, 'result');
-            if (result != null) {
+            String? result = ApiResultParser.getResultFromJson('abm', responseBody, 'result');
+            if(result != null) {
               timer.cancel();
               completer.complete(result);
             } else {
-              print('No result yet');
+              log('No result yet');
             }
           }
         } catch (e) {
@@ -121,50 +121,13 @@ class MagoABM {
       'accept': 'application/json',
       'Bearer': key,
     });
+    print('feature_name: $featureName');
+    print('plot_id: $id');
 
     if (response.statusCode == 200) {
       return response.bodyBytes; // 이미지 바이트 데이터를 직접 사용
     } else {
-      print('Plot failed with status: ${response.statusCode}');
-    }
-    return null;
-  }
-
-  String? getResultFromJson(String jsonResponse, String status) {
-    Map<String, dynamic> jsonObject = json.decode(jsonResponse);
-
-    // status에 따라서 다른 결과를 반환
-    if (status == 'upload') {
-      Map<String, dynamic> contentsObject = jsonObject['contents'];
-      String id = contentsObject['id'];
-      return id;
-    } else if (status == 'result') {
-      try {
-        Map<String, dynamic> contentsObject = jsonObject['contents'];
-        //print('ABM contentsObject: ok');
-        if (contentsObject.containsKey('results')) {
-          Map<String, dynamic> results = contentsObject['results'];
-          //print('ABM results: ok');
-          if (results.containsKey('biomarkers') &&
-              results['biomarkers'] is Map<String, dynamic>) {
-            //print('ABM biomarkers: ok');
-            String contentsJsonString = json.encode(results['biomarkers']);
-            //print('ABM contentsJsonString: $contentsJsonString');
-            return contentsJsonString;
-          } else {
-            String message = 'Failed to get biomarkers';
-            return message;
-          }
-        } else if (contentsObject.containsKey('detail')) {
-          String message = '실패';
-          return message;
-        } else {
-          return null;
-        }
-      } catch (e) {
-        print('Error parsing result: $e');
-        return null;
-      }
+      log('Plot failed with status: ${response.statusCode}');
     }
     return null;
   }

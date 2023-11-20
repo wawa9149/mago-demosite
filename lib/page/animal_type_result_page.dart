@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:comet/widget_design/emotionsGraphWidget.dart';
-import 'package:comet/widget_design/progressBarWidget.dart';
-import 'package:comet/widget_design/soundQualityGraphWidget.dart';
+import 'package:comet/result/emo_graph_result.dart';
+import 'package:comet/result/abm_progressbar_graph_result.dart';
+import 'package:comet/result/sound_quality_graph_result.dart';
 import 'package:flutter/material.dart';
 
 class AnimalTypeResult extends StatefulWidget {

@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 Container TextResultBox(String? result) {
   return Container(
     height: 250,
     width: 800,
-    padding: EdgeInsets.all(16.0),
+    padding: const EdgeInsets.all(16.0),
     decoration: BoxDecoration(
       color: Colors.white, // 배경색
       borderRadius: BorderRadius.circular(20), // 테두리의 모서리를 둥글게 만듦
@@ -20,19 +22,19 @@ Container TextResultBox(String? result) {
     child: SingleChildScrollView(
       // 스크롤 가능
       child: Center(
-        //child: Text(result!, style: TextStyle(fontSize: 15,)), // 결과 출력
-        child: Text(resultCheck(result), style: TextStyle(fontSize: 18,)), // 결과 출력
+        child: Text(resultCheck(result), style: const TextStyle(fontSize: 18,)), // 결과 출력
       ),
     ),
   );
 }
 
+// If the result value is null, 'N/A' is output.
 String resultCheck(String? result){
   if(result == null){
     return 'N/A';
   }
   else{
-    print('result: $result');
+    log('result: $result');
     return result;
   }
 }
