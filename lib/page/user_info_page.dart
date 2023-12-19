@@ -2,6 +2,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'api_result_page.dart';
 import '../api/api_request.dart';
 import '../widget/app_bar.dart';
@@ -27,32 +29,46 @@ class SelectedGender extends StatelessWidget {
     ElevatedButton api(String gender) {
       return ElevatedButton(
         onPressed: () async {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => FutureBuilder<List<String?>>(
-                future: GetApiResult(audioFile, audioFileName).getApiResult(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    // 로딩 중일 때 표시할 위젯 (로딩창)
-                    return Center(child: LoadingPage());
-                  } else if (snapshot.hasError) {
-                    // 에러 발생 시 표시할 위젯
-                    return Center(child: Text('에러 발생: ${snapshot.error}'));
-                  } else if (snapshot.hasData) {
-                    return ApiResultPage(
-                      result: snapshot.data!,
-                      audioSource: audioFile,
-                      gender: gender,
-                    );
-                  } else {
-                    // 다른 예외 상황 처리 (데이터가 없는 경우 등)
-                    return Center(child: Text('예외 상황 처리'));
-                  }
-                },
+          try {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FutureBuilder<List<String?>>(
+                  future: GetApiResult(audioFile, audioFileName)
+                      .getApiResult()
+                      .timeout(const Duration(seconds: 10)),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      // 로딩 중일 때 표시할 위젯 (로딩창)
+                      return Center(child: LoadingPage());
+                    } else if (snapshot.hasError) {
+                      // 에러 발생 시 표시할 위젯
+                      return Center(child: Text('에러 발생: ${snapshot.error}'));
+                    } else if (snapshot.hasData) {
+                      return ApiResultPage(
+                        result: snapshot.data!,
+                        audioSource: audioFile,
+                        gender: gender,
+                      );
+                    } else {
+                      // 다른 예외 상황 처리 (데이터가 없는 경우 등)
+                      return Center(child: Text('예외 상황 처리'));
+                    }
+                  },
+                ),
               ),
-            ),
-          );
+            );
+          } catch (e) {
+            print('에러 발생: $e');
+            Fluttertoast.showToast(
+              msg: '작업이 타임아웃되었습니다.',
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 3,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+            );
+          }
         },
         style: buttonStyle,
         child: Text(

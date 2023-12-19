@@ -20,6 +20,7 @@ class ProgressBar extends StatefulWidget {
 /// State class of progress bar sample.
 class ProgressBarState extends State<ProgressBar> {
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -34,6 +35,10 @@ class ProgressBarState extends State<ProgressBar> {
   }
 }
 
+TextStyle _textStyle = const TextStyle(
+    fontSize: 20, fontFamily: "NanumSquare_acB.ttf", color: Colors.black
+);
+
 SizedBox add(String feature, String less, String more, double data) {
   return SizedBox(
     height: 130,
@@ -43,7 +48,7 @@ SizedBox add(String feature, String less, String more, double data) {
       children: [
         Text(
           feature,
-          style: TextStyle(fontSize: 20),
+          style: _textStyle,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +56,7 @@ SizedBox add(String feature, String less, String more, double data) {
           children: [
             Text(
               less,
-              style: TextStyle(fontSize: 20),
+              style: _textStyle,
             ),
             Stack(
               children: <Widget>[
@@ -103,7 +108,7 @@ SizedBox add(String feature, String less, String more, double data) {
             ),
             Text(
               more,
-              style: TextStyle(fontSize: 20),
+              style: _textStyle,
             ),
           ],
         ),
